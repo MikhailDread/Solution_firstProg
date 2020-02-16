@@ -9,14 +9,11 @@ import org.openqa.selenium.*;
 
 public class AddNewContact {
   private WebDriver driver;
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
+
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     driver = new ChromeDriver();
-    baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/delete.php?part=1;2;");
     login("admin", "secret");
@@ -81,10 +78,7 @@ public class AddNewContact {
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
+
   }
 
   private boolean isElementPresent(By by) {
@@ -105,18 +99,4 @@ public class AddNewContact {
     }
   }
 
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
 }

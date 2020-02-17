@@ -1,4 +1,4 @@
-package ru.solutionfirstprog.addressbook;
+package ru.solutionfirstprog.addressbook.module;
 
 public class ContactIng {
     private final String company;

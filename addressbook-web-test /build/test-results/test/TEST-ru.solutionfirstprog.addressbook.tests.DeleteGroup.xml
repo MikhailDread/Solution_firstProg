@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.solutionfirstprog.addressbook.AddNewContact" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-02-16T07:31:53" hostname="MacBook-Pro-Mihail.local" time="1.225">
+<testsuite name="ru.solutionfirstprog.addressbook.tests.DeleteGroup" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-02-17T19:36:03" hostname="MacBook-Pro-Mihail.local" time="0.408">
   <properties/>
-  <testcase name="testAddNewContact" classname="ru.solutionfirstprog.addressbook.AddNewContact" time="1.225"/>
+  <testcase name="testDeleteGroup" classname="ru.solutionfirstprog.addressbook.tests.DeleteGroup" time="0.408"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-Starting ChromeDriver 80.0.3987.106 (f68069574609230cf9b635cd784cfb1bf81bb53a-refs/branch-heads/3987@{#882}) on port 25500
+Starting ChromeDriver 80.0.3987.106 (f68069574609230cf9b635cd784cfb1bf81bb53a-refs/branch-heads/3987@{#882}) on port 29539
 Only local connections are allowed.
 Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
-фев 16, 2020 10:31:53 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+фев 17, 2020 10:36:03 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
 ]]></system-err>
 </testsuite>

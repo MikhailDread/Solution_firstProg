@@ -1,4 +1,4 @@
-package ru.solutionfirstprog.addressbook;
+package ru.solutionfirstprog.addressbook.module;
 
 public class UserInf {
     private final String name;

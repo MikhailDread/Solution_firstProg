@@ -4,7 +4,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
-import ru.solutionfirstprog.addressbook.module.UserInf;
 
 import static org.testng.Assert.assertTrue;
 
@@ -23,14 +22,11 @@ public class ContactHelper extends Helperbase{
         type(By.name("company"), contactIng.getCompany());
       type(By.name("address"), contactIng.getStreet());
       type(By.name("email"), contactIng.getEmail());
+        type(By.name("firstname"), contactIng.getName());
+        type(By.name("middlename"), contactIng.getMiddlename());
+        type(By.name("lastname"), contactIng.getLastname());
     }
 
-    public void createUserInf(UserInf userInf) {
-        type(By.name("firstname"), userInf.getName());
-        type(By.name("middlename"), userInf.getMiddlename());
-        type(By.name("lastname"), userInf.getLastname());
-
-    }
 
     public String closeAlertAndGetItsText() {
       try {

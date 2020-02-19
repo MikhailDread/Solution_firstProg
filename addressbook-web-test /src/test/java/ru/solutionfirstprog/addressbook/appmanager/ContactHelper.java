@@ -47,4 +47,13 @@ public class ContactHelper extends Helperbase{
       click(By.xpath("//input[@value='Delete']"));
       assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
+
+    public void tookContactModification() {
+       click(By.name("selected[]"));
+       click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }

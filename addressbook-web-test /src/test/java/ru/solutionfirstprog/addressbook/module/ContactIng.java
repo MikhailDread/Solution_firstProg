@@ -7,14 +7,16 @@ public class ContactIng {
     private final String name;
     private final String middlename;
     private final String lastname;
+    private String group;
 
-    public ContactIng(String company, String street, String email, String name, String middlename, String lastname) {
+    public ContactIng(String company, String street, String email, String name, String middlename, String lastname, String group) {
         this.company = company;
         this.street = street;
         this.email = email;
         this.name = name;
         this.middlename = middlename;
         this.lastname = lastname;
+        this.group = group;
     }
 
     public String getCompany() {
@@ -40,5 +42,9 @@ public class ContactIng {
         public String getLastname() {
             return lastname;
         }
+
+    public String getGroup() {
+        return group;
     }
+}
 

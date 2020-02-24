@@ -22,9 +22,9 @@ public class Helperbase {
         driver.findElement(locator).sendKeys(text);
     }
 
-    private boolean isElementPresent(By by) {
+    public boolean isElementPresent(By locator) {
         try {
-            driver.findElement(by);
+            driver.findElement(locator);
             return true;
         } catch (NoSuchElementException e) {
             return false;

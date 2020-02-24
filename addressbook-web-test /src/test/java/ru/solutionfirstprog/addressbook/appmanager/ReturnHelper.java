@@ -10,10 +10,14 @@ public class ReturnHelper extends Helperbase{
     }
 
     public void gotoHomePage() {
-      click(By.linkText("home page"));
+
+        click(By.linkText("home page"));
     }
 
     public void returnHome() {
-      click(By.linkText("home"));
+        if(isElementPresent(By.id("maintable"))){
+            return;
+        }
+            click(By.linkText("home"));
     }
 }

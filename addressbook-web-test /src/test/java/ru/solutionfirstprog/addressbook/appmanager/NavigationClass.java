@@ -12,6 +12,12 @@ public class NavigationClass extends Helperbase{
 
     public void gotoGroup() {
 
+        if(isElementPresent(By.tagName("h1"))
+                && driver.findElement(By.tagName("h1")).getText().equals("Group")
+                && isElementPresent(By.name("new"))){
+            return;
+        }
+
         click(By.linkText("groups"));
     }
 

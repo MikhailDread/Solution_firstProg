@@ -5,9 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.safari.SafariDriver;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class ApplicationManager{
@@ -30,7 +28,7 @@ public class ApplicationManager{
         } else if (browser.equals(BrowserType.FIREFOX)){
             driver = new FirefoxDriver();
         }
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         groupHelper = new GroupHelper(driver);
         navigationClass = new NavigationClass(driver);
         sessionHelper  = new SessionHelper(driver);

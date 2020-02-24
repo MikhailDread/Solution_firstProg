@@ -11,10 +11,10 @@ public class DeleteContact extends TestBase{
   @Test
   public void testDeleteContact() throws Exception {
     applicationManager.getReturnHelper().returnHome();
-    if(! applicationManager.getContactHelper().thereAContact()){
-      applicationManager.getNavigationClass().gotoNewContact();
-      applicationManager.getContactHelper().createContact(new ContactIng("RZD", "Moscow, street Tambovskaya.", "jonjolli@yandex.fu", "Ivan", "Ivanovich", "Ivanov", "test1"));
-      applicationManager.getReturnHelper().gotoHomePage();
+    if(!applicationManager.getContactHelper().thereAContact()){ //если нет возможности нажать селектед
+      applicationManager.getNavigationClass().gotoNewContact();  //создание контакта
+      applicationManager.getContactHelper().createContact();   //создание контакта
+      applicationManager.getReturnHelper().gotoHomePage();  //создание контакта
     }
     applicationManager.getGroupHelper().selectGroup();
     applicationManager.getContactHelper().deleteContact();

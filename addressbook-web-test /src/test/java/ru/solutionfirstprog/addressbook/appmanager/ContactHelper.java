@@ -67,13 +67,15 @@ public class ContactHelper extends Helperbase{
         click(By.name("update"));
     }
 
+
     public boolean thereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContact(ContactIng contact) {
 
-        createContactInf(contact, true);
+    public void createContact() {
+
+        createContactInf(new ContactIng("RZD", "Moscow, street Tambovskaya.", "jonjolli@yandex.fu", "Ivan", "Ivanovich", "Ivanov", "test1"), true);
         submitCreation();
     }
 }

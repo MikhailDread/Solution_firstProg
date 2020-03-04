@@ -1,5 +1,7 @@
 package ru.solutionfirstprog.addressbook.module;
 
+import java.util.Objects;
+
 public class ContactIng {
     private final String company;
     private final String street;
@@ -45,6 +47,27 @@ public class ContactIng {
 
     public String getGroup() {
         return group;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactIng{" +
+                "lastname='" + lastname + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactIng that = (ContactIng) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(lastname, that.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastname);
     }
 }
 

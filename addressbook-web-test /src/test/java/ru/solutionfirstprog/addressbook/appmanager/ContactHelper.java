@@ -3,9 +3,13 @@ package ru.solutionfirstprog.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -77,5 +81,17 @@ public class ContactHelper extends Helperbase{
 
         createContactInf(new ContactIng("RZD", "Moscow, street Tambovskaya.", "jonjolli@yandex.fu", "Ivan", "Ivanovich", "Ivanov", "test1"), true);
         submitCreation();
+    }
+
+    public List<ContactIng> contactList() {
+        List<ContactIng>contact = new ArrayList<>();
+        List<WebElement>elements = driver.findElements(By.cssSelector("tr.entry"));
+        for(WebElement e : elements){
+            String name = e.getAttribute("alt");
+            String lastname = e.getAttribute("title");
+            ContactIng cont = new ContactIng(name, lastname, null, null, null, null, null);
+            contact.add(cont);
+        }
+        return contact;
     }
 }

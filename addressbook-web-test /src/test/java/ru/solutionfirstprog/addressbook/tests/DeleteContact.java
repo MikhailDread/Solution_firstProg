@@ -1,8 +1,12 @@
 package ru.solutionfirstprog.addressbook.tests;
 
 
+import org.testng.Assert;
 import org.testng.annotations.*;
+import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
+
+import java.util.List;
 
 
 public class DeleteContact extends TestBase{
@@ -22,10 +26,13 @@ public class DeleteContact extends TestBase{
       applicationManager.getContactHelper().createContact();
       applicationManager.getReturnHelper().gotoHomePage();
     }
-
-    applicationManager.getGroupHelper().selectGroup();
+    List<ContactIng> before = applicationManager.getContactHelper().contactList();
+    applicationManager.getGroupHelper().selectGroup(before.size() - 1);
     applicationManager.getContactHelper().deleteContact();
     applicationManager.getReturnHelper().returnHome();
+    List<ContactIng> after = applicationManager.getContactHelper().contactList();
+    Assert.assertEquals(after.size(), before.size() -1);
+
   }
 
 

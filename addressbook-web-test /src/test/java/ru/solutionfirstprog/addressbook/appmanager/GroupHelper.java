@@ -2,7 +2,11 @@ package ru.solutionfirstprog.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends Helperbase{
 
@@ -33,8 +37,8 @@ public class GroupHelper extends Helperbase{
         click(By.name("delete"));
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        driver.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initGroupModification() {
@@ -56,4 +60,21 @@ public class GroupHelper extends Helperbase{
 
         return isElementPresent(By.name("selected[]"));
     }
+
+    public int groupCount(){
+        return driver.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupInf> groupList() {
+        List<GroupInf> group = new ArrayList<>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
+        for(WebElement e : elements){
+            String name = e.getText();
+            int id = Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"));
+            GroupInf user = new GroupInf(id, name, null, null);
+            group.add(user);
+        }
+        return group;
+    }
+
 }

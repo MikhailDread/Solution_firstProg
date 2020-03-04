@@ -3,6 +3,7 @@ package ru.solutionfirstprog.addressbook.module;
 import java.util.Objects;
 
 public class ContactIng {
+    private int id;
     private final String company;
     private final String street;
     private final String email;
@@ -12,6 +13,17 @@ public class ContactIng {
     private String group;
 
     public ContactIng(String company, String street, String email, String name, String middlename, String lastname, String group) {
+        this.id = Integer.MAX_VALUE;
+        this.company = company;
+        this.street = street;
+        this.email = email;
+        this.name = name;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.group = group;
+    }
+    public ContactIng(int id, String company, String street, String email, String name, String middlename, String lastname, String group) {
+        this.id = id;
         this.company = company;
         this.street = street;
         this.email = email;
@@ -61,13 +73,14 @@ public class ContactIng {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactIng that = (ContactIng) o;
-        return Objects.equals(name, that.name) &&
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastname);
+        return Objects.hash(id, name, lastname);
     }
 }
 

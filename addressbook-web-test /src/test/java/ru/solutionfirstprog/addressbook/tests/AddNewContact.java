@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -17,9 +18,9 @@ public class AddNewContact extends TestBase {
     applicationManager.getContactHelper().submitCreation();
     applicationManager.getReturnHelper().gotoHomePage();
     List<ContactIng> after = applicationManager.getContactHelper().contactList();
+    Assert.assertEquals(after.size(), before.size());
 
-    Assert.assertEquals(after, before);
-
+    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
 
   }
 

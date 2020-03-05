@@ -33,6 +33,9 @@ public class DeleteContact extends TestBase{
     List<ContactIng> after = applicationManager.getContactHelper().contactList();
     Assert.assertEquals(after.size(), before.size() -1);
 
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after.size(), before.size());
+
   }
 
 

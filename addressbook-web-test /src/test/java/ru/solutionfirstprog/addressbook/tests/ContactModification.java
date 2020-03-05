@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -33,5 +34,7 @@ public class ContactModification extends TestBase {
         applicationManager.getReturnHelper().gotoHomePage();
         List<ContactIng> after = applicationManager.getContactHelper().contactList();
         Assert.assertEquals(after.size(), before.size());
+
+        Assert.assertEquals(new HashSet(after), new HashSet(before));
     }
 }

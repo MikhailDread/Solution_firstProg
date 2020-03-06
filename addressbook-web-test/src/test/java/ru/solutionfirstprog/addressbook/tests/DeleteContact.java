@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -35,6 +36,11 @@ public class DeleteContact extends TestBase{
 
     before.remove(before.size() - 1);
     Assert.assertEquals(after.size(), before.size());
+
+    Comparator<ContactIng> maxId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
+    after.sort(maxId);
+    before.sort(maxId);
+    Assert.assertEquals(after, before);
 
   }
 

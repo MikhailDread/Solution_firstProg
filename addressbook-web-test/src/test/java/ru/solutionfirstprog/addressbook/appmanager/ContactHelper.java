@@ -86,13 +86,15 @@ public class ContactHelper extends Helperbase {
     public List<ContactIng> contactList() {
         List<ContactIng> list = new ArrayList<>();
         List <WebElement> contact = driver.findElements(By.name("entry"));
-        for(int i = 0 ; i < contact.size(); i++){
-            String name = contact.get(i).findElement(By.tagName("input")).getAttribute("alt");
-            String lastname = contact.get(i).findElement(By.tagName("input")).getAttribute("title");
-            int id = Integer.parseInt(contact.get(i).findElement(By.tagName("input")).getAttribute("value"));
-            ContactIng cont = new ContactIng(id, name, lastname, null, null, null, null, null);
+        for(WebElement e : contact){
+            List<WebElement> cells = e.findElements(By.tagName("td"));
+            String name = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            ContactIng cont = new ContactIng(id, null, null, null, name, null, lastname , null);
             list.add(cont);
         }
         return list;
     }
+
 }

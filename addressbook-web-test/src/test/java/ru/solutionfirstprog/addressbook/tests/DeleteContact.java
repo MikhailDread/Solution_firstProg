@@ -18,7 +18,7 @@ public class DeleteContact extends TestBase{
     applicationManager.getGoTo().groupPage();
 
     if(!applicationManager.group().isThereAGroup()){
-      applicationManager.group().create(new GroupInf("test1", "test2", "test3"));
+      applicationManager.group().create(new GroupInf().withName("test1"));
     }
     applicationManager.getReturnHelper().returnHome();
 

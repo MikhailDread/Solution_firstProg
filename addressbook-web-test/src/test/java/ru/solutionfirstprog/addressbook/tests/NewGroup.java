@@ -1,32 +1,31 @@
 package ru.solutionfirstprog.addressbook.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
+import ru.solutionfirstprog.addressbook.module.Groups;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class NewGroup extends TestBase {
 
   @Test
   public void testUntitledTestCase() throws Exception {
     applicationManager.getGoTo().groupPage();
-    List<GroupInf> before = applicationManager.group().list();
-    GroupInf group = new GroupInf("test1", "test2", "test3");
+    Groups before = applicationManager.group().all();
+    GroupInf group = new GroupInf().withName("test2").withFeeder("test2").withHeader("test2");
     applicationManager.group().create(group);
-    List<GroupInf> after = applicationManager.group().list();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Groups after = applicationManager.group().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
 
-    int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
 
-    group.setId(max1);
-    before.add(group);
-
-    Comparator<? super GroupInf> byId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(after, before);
+    assertThat(after, equalTo(
+            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
 }

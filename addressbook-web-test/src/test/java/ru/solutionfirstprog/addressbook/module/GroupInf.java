@@ -3,26 +3,10 @@ package ru.solutionfirstprog.addressbook.module;
 import java.util.Objects;
 
 public class GroupInf {
-    private int id;
-    private final String name;
-    private final String header;
-    private final String feeder;
-
-
-    public GroupInf(String name, String header, String feeder) {
-        this.id = Integer.MAX_VALUE;
-        this.name = name;
-        this.header = header;
-        this.feeder = feeder;
-    }
-
-
-    public GroupInf(int id, String name, String header, String feeder) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
-        this.feeder = feeder;
-    }
+    private int id = Integer.MAX_VALUE;
+    private  String name;
+    private  String header;
+    private  String feeder;
 
     public String getName() {
         return name;
@@ -40,8 +24,38 @@ public class GroupInf {
         return id;
     }
 
-    public void setId(int id) {
+    public GroupInf withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public GroupInf withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public GroupInf withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupInf withFeeder(String feeder) {
+        this.feeder = feeder;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupInf groupInf = (GroupInf) o;
+        return id == groupInf.id &&
+                Objects.equals(name, groupInf.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     @Override
@@ -53,16 +67,4 @@ public class GroupInf {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GroupInf groupInf = (GroupInf) o;
-        return Objects.equals(name, groupInf.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

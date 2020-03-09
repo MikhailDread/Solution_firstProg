@@ -4,9 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
+import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends Helperbase{
 
@@ -30,8 +33,8 @@ public class GroupHelper extends Helperbase{
     }
 
 
-    public void modify(int index, GroupInf group) {
-        selectGroup(index);
+    public void modify(GroupInf group) {
+        selectGroupById(group.getId());
         initGroupModification();
         creationGroup(group);
         submitGroupModification();
@@ -48,6 +51,10 @@ public class GroupHelper extends Helperbase{
 
     public void selectGroup(int index) {
         driver.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectGroupById(int id) {
+        driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void initGroupModification() {
@@ -71,23 +78,25 @@ public class GroupHelper extends Helperbase{
         returnToGroupPage();
     }
 
+    public void delete(GroupInf group) {
+        selectGroupById(group.getId());
+        deleteGroup();
+        returnToGroupPage();
+    }
+
     public boolean isThereAGroup() {
 
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int groupCount(){
-        return driver.findElements(By.name("selected[]")).size();
-    }
 
-    public List<GroupInf> list() {
-        List<GroupInf> group = new ArrayList<>();
+    public Groups all() {
+        Groups group = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for(WebElement e : elements){
             String name = e.getText();
             int id = Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"));
-            GroupInf user = new GroupInf(id, name, null, null);
-            group.add(user);
+            group.add(new GroupInf().withId(id).withName(name));
         }
         return group;
     }

@@ -6,7 +6,6 @@ import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -15,16 +14,16 @@ public class ContactModification extends TestBase {
     @Test
     public void testContactModification(){
 
-        applicationManager.getNavigationClass().gotoGroup();
+        applicationManager.getGoTo().groupPage();
 
-        if(!applicationManager.getGroupHelper().isThereAGroup()){
-            applicationManager.getGroupHelper().createGroup(new GroupInf("test1", "test2", "test3"));
+        if(!applicationManager.group().isThereAGroup()){
+            applicationManager.group().create(new GroupInf("test1", "test2", "test3"));
         }
 
         applicationManager.getReturnHelper().returnHome();
 
         if(!applicationManager.getContactHelper().thereAContact()){
-            applicationManager.getNavigationClass().gotoNewContact();
+            applicationManager.getGoTo().gotoNewContact();
             applicationManager.getContactHelper().createContact();
             applicationManager.getReturnHelper().gotoHomePage();
         }

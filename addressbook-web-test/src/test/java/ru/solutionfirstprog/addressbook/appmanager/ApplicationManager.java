@@ -12,7 +12,7 @@ public class ApplicationManager{
     WebDriver driver;
     private ReturnHelper returnHelper;
     private ContactHelper contactHelper;
-    private NavigationClass navigationClass;
+    private NavigationClass goTo;
     private GroupHelper groupHelper;
     private SessionHelper sessionHelper;
     private String browser;
@@ -30,7 +30,7 @@ public class ApplicationManager{
         }
         //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         groupHelper = new GroupHelper(driver);
-        navigationClass = new NavigationClass(driver);
+        goTo = new NavigationClass(driver);
         sessionHelper  = new SessionHelper(driver);
         contactHelper  = new ContactHelper(driver);
         returnHelper = new ReturnHelper(driver);
@@ -43,12 +43,12 @@ public class ApplicationManager{
     }
 
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationClass getNavigationClass() {
-        return navigationClass;
+    public NavigationClass getGoTo() {
+        return goTo;
     }
 
     public SessionHelper getSessionHelper() {

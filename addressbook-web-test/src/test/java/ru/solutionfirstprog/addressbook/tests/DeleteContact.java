@@ -15,20 +15,20 @@ public class DeleteContact extends TestBase{
 
   @Test
   public void testDeleteContact() throws Exception {
-    applicationManager.getNavigationClass().gotoGroup();
+    applicationManager.getGoTo().groupPage();
 
-    if(!applicationManager.getGroupHelper().isThereAGroup()){
-      applicationManager.getGroupHelper().createGroup(new GroupInf("test1", "test2", "test3"));
+    if(!applicationManager.group().isThereAGroup()){
+      applicationManager.group().create(new GroupInf("test1", "test2", "test3"));
     }
     applicationManager.getReturnHelper().returnHome();
 
     if(!applicationManager.getContactHelper().thereAContact()){
-      applicationManager.getNavigationClass().gotoNewContact();
+      applicationManager.getGoTo().gotoNewContact();
       applicationManager.getContactHelper().createContact();
       applicationManager.getReturnHelper().gotoHomePage();
     }
     List<ContactIng> before = applicationManager.getContactHelper().contactList();
-    applicationManager.getGroupHelper().selectGroup(before.size() - 1);
+    applicationManager.group().selectGroup(before.size() - 1);
     applicationManager.getContactHelper().deleteContact();
     applicationManager.getReturnHelper().returnHome();
     List<ContactIng> after = applicationManager.getContactHelper().contactList();

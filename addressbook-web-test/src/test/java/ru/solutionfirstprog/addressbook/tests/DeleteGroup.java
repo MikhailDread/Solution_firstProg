@@ -10,20 +10,24 @@ import java.util.List;
 
 public class DeleteGroup extends TestBase{
 
+
+  @BeforeMethod
+  public void ensurePrecondotions(){
+    applicationManager.getGoTo().groupPage();
+    if(applicationManager.group().list().size() == 0){
+      applicationManager.group().create(new GroupInf("test1", null, null));
+    }
+  }
+
   @Test
   public void testDeleteGroup() throws Exception {
-    applicationManager.getNavigationClass().gotoGroup();
-    if(!applicationManager.getGroupHelper().isThereAGroup()){
-      applicationManager.getGroupHelper().createGroup(new GroupInf("test1", "test2", "test3"));
-    }
-    List<GroupInf> before = applicationManager.getGroupHelper().groupList();
-    applicationManager.getGroupHelper().selectGroup(before.size() - 1);
-    applicationManager.getGroupHelper().deleteGroup();
-    applicationManager.getGroupHelper().returnToGroupPage();
-    List<GroupInf> after = applicationManager.getGroupHelper().groupList();
+    List<GroupInf> before = applicationManager.group().list();
+    int index = before.size() - 1;
+    applicationManager.group().delete(index);
+    List<GroupInf> after = applicationManager.group().list();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() -1);
+    before.remove(index);
     Assert.assertEquals(after.size(), before.size());
 
     Comparator<? super GroupInf> byId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
@@ -31,6 +35,5 @@ public class DeleteGroup extends TestBase{
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
-
 
 }

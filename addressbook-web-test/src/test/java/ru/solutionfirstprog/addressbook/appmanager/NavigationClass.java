@@ -10,7 +10,7 @@ public class NavigationClass extends Helperbase{
         super(driver);
     }
 
-    public void gotoGroup() {
+    public void groupPage() {
 
         if(isElementPresent(By.tagName("h1"))
                 && driver.findElement(By.tagName("h1")).getText().equals("Group")

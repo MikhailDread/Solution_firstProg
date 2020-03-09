@@ -15,7 +15,7 @@ public class AddNewContact extends TestBase {
   public void testAddNewContact() throws Exception {
     applicationManager.getReturnHelper().returnHome();
     List<ContactIng> before = applicationManager.getContactHelper().contactList();
-    applicationManager.getNavigationClass().gotoNewContact();
+    applicationManager.getGoTo().gotoNewContact();
     ContactIng contact = new ContactIng("RZD", "Moscow, street Tambovskaya.", "jonjolli@yandex.fu", "Ivan", "Ivanovich", "Ivanov", "test1");
     applicationManager.getContactHelper().createContactInf(contact, true);
     applicationManager.getContactHelper().submitCreation();

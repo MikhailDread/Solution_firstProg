@@ -1,21 +1,11 @@
 package ru.solutionfirstprog.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
-import ru.solutionfirstprog.addressbook.module.Groups;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class AddNewContact extends TestBase {

@@ -3,14 +3,10 @@ package ru.solutionfirstprog.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends Helperbase{
 
@@ -50,10 +46,6 @@ public class GroupHelper extends Helperbase{
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-        driver.findElements(By.name("selected[]")).get(index).click();
-    }
-
     public void selectContactById(int id) {
         driver.findElement(By.cssSelector("input[value = '" + id + "']")).click();
     }
@@ -77,23 +69,12 @@ public class GroupHelper extends Helperbase{
         returnToGroupPage();
     }
 
-    public void delete(int index) {
-        selectGroup(index);
-        deleteGroup();
-        returnToGroupPage();
-    }
 
     public void delete(GroupInf group) {
         selectGroupById(group.getId());
         deleteGroup();
         returnToGroupPage();
     }
-
-    public boolean isThereAGroup() {
-
-        return isElementPresent(By.name("selected[]"));
-    }
-
 
     public Groups all() {
         Groups group = new Groups();

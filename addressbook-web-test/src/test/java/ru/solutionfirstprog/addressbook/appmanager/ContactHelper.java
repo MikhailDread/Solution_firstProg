@@ -8,12 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
-import ru.solutionfirstprog.addressbook.module.Groups;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -86,20 +82,6 @@ public class ContactHelper extends Helperbase {
         submitCreation();
     }
 
-
-    public List<ContactIng> list() {
-        List<ContactIng> list = new ArrayList<>();
-        List <WebElement> contact = driver.findElements(By.name("entry"));
-        for(WebElement e : contact){
-            List<WebElement> cells = e.findElements(By.tagName("td"));
-            String name = cells.get(2).getText();
-            String lastname = cells.get(1).getText();
-            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).withMiddlename(null).withLastname(lastname).withGroup(null);
-            list.add(cont);
-        }
-        return list;
-    }
 
     public Contacts all() {
         Contacts list = new Contacts();

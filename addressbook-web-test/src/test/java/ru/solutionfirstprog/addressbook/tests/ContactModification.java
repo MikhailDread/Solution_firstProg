@@ -1,14 +1,21 @@
 package ru.solutionfirstprog.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
+import ru.solutionfirstprog.addressbook.module.Contacts;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 
 public class ContactModification extends TestBase {
@@ -33,20 +40,17 @@ public class ContactModification extends TestBase {
     @Test
     public void testContactModification(){
 
-        Set<ContactIng> before = applicationManager.contact().all();
+        Contacts before = applicationManager.contact().all();
         ContactIng modifyContact = before.iterator().next();
         applicationManager.contact().contactModification();
         ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1");
         applicationManager.contact().creationContact(contact, false);
         applicationManager.contact().submit();
         applicationManager.returned().homePage();
-        Set<ContactIng> after = applicationManager.contact().all();
-        Assert.assertEquals(after.size(), before.size());
+        Contacts after = applicationManager.contact().all();
+        assertThat(after.size(), equalTo(before.size()));
 
-        before.remove(modifyContact);
-        before.add(contact);
-
-        Assert.assertEquals(after, before);
+        assertThat(after, equalTo(before.without(modifyContact).withAdded(modifyContact)));
     }
 
 }

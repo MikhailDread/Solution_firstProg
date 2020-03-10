@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
+import ru.solutionfirstprog.addressbook.module.Contacts;
+import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -99,8 +101,8 @@ public class ContactHelper extends Helperbase {
         return list;
     }
 
-    public Set<ContactIng> all() {
-        Set<ContactIng> list = new HashSet<>();
+    public Contacts all() {
+        Contacts list = new Contacts();
         List <WebElement> contact = driver.findElements(By.name("entry"));
         for(WebElement e : contact){
             List<WebElement> cells = e.findElements(By.tagName("td"));

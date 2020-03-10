@@ -1,14 +1,21 @@
 package ru.solutionfirstprog.addressbook.tests;
 
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
+import ru.solutionfirstprog.addressbook.module.Contacts;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 
 public class DeleteContact extends TestBase{
@@ -33,19 +40,15 @@ public class DeleteContact extends TestBase{
 
   @Test
   public void testDeleteContact() throws Exception {
-    Set<ContactIng> before = applicationManager.contact().all();
+    Contacts before = applicationManager.contact().all();
     ContactIng deleteContact = before.iterator().next();
     applicationManager.group().selectContactById(deleteContact.getId());
     applicationManager.contact().delete();
     applicationManager.returned().returnHome();
-    Set<ContactIng> after = applicationManager.contact().all();
-    Assert.assertEquals(after.size(), before.size() -1);
+    Contacts after = applicationManager.contact().all();
+    assertThat(after.size(), equalTo(before.size() -1));
 
-    before.remove(deleteContact );
-    Assert.assertEquals(after.size(), before.size());
-
-    Assert.assertEquals(after, before);
-
+    assertThat(after, equalTo(before.without(deleteContact)));
   }
 
 

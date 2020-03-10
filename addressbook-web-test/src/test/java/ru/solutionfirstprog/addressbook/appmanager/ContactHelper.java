@@ -9,7 +9,9 @@ import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -25,7 +27,7 @@ public class ContactHelper extends Helperbase {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void createContactInf(ContactIng contactIng, boolean creation) {
+    public void creationContact(ContactIng contactIng, boolean creation) {
         type(By.name("company"), contactIng.getCompany());
         type(By.name("address"), contactIng.getStreet());
         type(By.name("email"), contactIng.getEmail());
@@ -40,7 +42,6 @@ public class ContactHelper extends Helperbase {
         }
 
     }
-
 
     public String closeAlertAndGetItsText() {
         try {
@@ -57,17 +58,17 @@ public class ContactHelper extends Helperbase {
         }
     }
 
-    public void deleteContact() {
+    public void delete() {
         click(By.xpath("//input[@value='Delete']"));
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
 
-    public void tookContactModification() {
+    public void contactModification() {
         click(By.name("selected[]"));
         click(By.xpath("//img[@alt='Edit']"));
     }
 
-    public void submitContactModification() {
+    public void submit() {
         click(By.name("update"));
     }
 
@@ -77,13 +78,14 @@ public class ContactHelper extends Helperbase {
     }
 
 
-    public void createContact() {
+    public void create() {
 
-        createContactInf(new ContactIng("RZD", "Moscow, street Tambovskaya.", "jonjolli@yandex.fu", "Ivan", "Ivanovich", "Ivanov", "test1"), true);
+        creationContact(new ContactIng().withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1"), true);
         submitCreation();
     }
 
-    public List<ContactIng> contactList() {
+
+    public List<ContactIng> list() {
         List<ContactIng> list = new ArrayList<>();
         List <WebElement> contact = driver.findElements(By.name("entry"));
         for(WebElement e : contact){
@@ -91,7 +93,21 @@ public class ContactHelper extends Helperbase {
             String name = cells.get(2).getText();
             String lastname = cells.get(1).getText();
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            ContactIng cont = new ContactIng(id, null, null, null, name, null, lastname , null);
+            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).withMiddlename(null).withLastname(lastname).withGroup(null);
+            list.add(cont);
+        }
+        return list;
+    }
+
+    public Set<ContactIng> all() {
+        Set<ContactIng> list = new HashSet<>();
+        List <WebElement> contact = driver.findElements(By.name("entry"));
+        for(WebElement e : contact){
+            List<WebElement> cells = e.findElements(By.tagName("td"));
+            String name = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).withMiddlename(null).withLastname(lastname).withGroup(null);
             list.add(cont);
         }
         return list;

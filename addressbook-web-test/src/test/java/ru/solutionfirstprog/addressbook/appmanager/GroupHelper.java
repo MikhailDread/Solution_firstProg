@@ -3,6 +3,7 @@ package ru.solutionfirstprog.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
 
@@ -51,6 +52,10 @@ public class GroupHelper extends Helperbase{
 
     public void selectGroup(int index) {
         driver.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContactById(int id) {
+        driver.findElement(By.cssSelector("input[value = '" + id + "']")).click();
     }
 
     public void selectGroupById(int id) {

@@ -9,7 +9,7 @@ public class ReturnHelper extends Helperbase{
         super(driver);
     }
 
-    public void gotoHomePage() {
+    public void homePage() {
 
         click(By.linkText("home page"));
     }

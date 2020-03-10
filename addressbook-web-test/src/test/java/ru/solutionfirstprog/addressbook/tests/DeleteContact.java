@@ -8,38 +8,42 @@ import ru.solutionfirstprog.addressbook.module.GroupInf;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 
 public class DeleteContact extends TestBase{
 
+  @BeforeMethod
+  public void ensurePrecondotions(){
+    applicationManager.getGoTo().groupPage();
+
+    if(applicationManager.group().all().size() == 0){
+    applicationManager.group().create(new GroupInf().withName("test1"));
+  }
+    applicationManager.returned().returnHome();
+    if(!applicationManager.contact().thereAContact()){
+      applicationManager.getGoTo().newContact();
+      applicationManager.contact().create();
+      applicationManager.returned().homePage();
+    }
+  }
+
+
+
 
   @Test
   public void testDeleteContact() throws Exception {
-    applicationManager.getGoTo().groupPage();
-
-    if(!applicationManager.group().isThereAGroup()){
-      applicationManager.group().create(new GroupInf().withName("test1"));
-    }
-    applicationManager.getReturnHelper().returnHome();
-
-    if(!applicationManager.getContactHelper().thereAContact()){
-      applicationManager.getGoTo().gotoNewContact();
-      applicationManager.getContactHelper().createContact();
-      applicationManager.getReturnHelper().gotoHomePage();
-    }
-    List<ContactIng> before = applicationManager.getContactHelper().contactList();
-    applicationManager.group().selectGroup(before.size() - 1);
-    applicationManager.getContactHelper().deleteContact();
-    applicationManager.getReturnHelper().returnHome();
-    List<ContactIng> after = applicationManager.getContactHelper().contactList();
+    Set<ContactIng> before = applicationManager.contact().all();
+    ContactIng deleteContact = before.iterator().next();
+    applicationManager.group().selectContactById(deleteContact.getId());
+    applicationManager.contact().delete();
+    applicationManager.returned().returnHome();
+    Set<ContactIng> after = applicationManager.contact().all();
     Assert.assertEquals(after.size(), before.size() -1);
 
-    before.remove(before.size() - 1);
+    before.remove(deleteContact );
     Assert.assertEquals(after.size(), before.size());
 
-    Comparator<ContactIng> maxId = (o1, o2) -> Integer.compare(o1.getId(), o2.getId());
-    after.sort(maxId);
-    before.sort(maxId);
     Assert.assertEquals(after, before);
 
   }

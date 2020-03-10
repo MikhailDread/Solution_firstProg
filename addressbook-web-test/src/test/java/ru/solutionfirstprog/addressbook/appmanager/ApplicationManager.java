@@ -55,11 +55,11 @@ public class ApplicationManager{
         return sessionHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 
-    public ReturnHelper getReturnHelper() {
+    public ReturnHelper returned() {
         return returnHelper;
     }
 }

@@ -3,35 +3,15 @@ package ru.solutionfirstprog.addressbook.module;
 import java.util.Objects;
 
 public class ContactIng {
-    private int id;
-    private final String company;
-    private final String street;
-    private final String email;
-    private final String name;
-    private final String middlename;
-    private final String lastname;
-    private String group;
 
-    public ContactIng(String company, String street, String email, String name, String middlename, String lastname, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.company = company;
-        this.street = street;
-        this.email = email;
-        this.name = name;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.group = group;
-    }
-    public ContactIng(int id, String company, String street, String email, String name, String middlename, String lastname, String group) {
-        this.id = id;
-        this.company = company;
-        this.street = street;
-        this.email = email;
-        this.name = name;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.group = group;
-    }
+    private int id = Integer.MAX_VALUE;;
+    private String company;
+    private String street;
+    private String email;
+    private String name;
+    private String middlename;
+    private String lastname;
+    private String group;
 
     public String getCompany() {
         return company;
@@ -61,12 +41,62 @@ public class ContactIng {
         return group;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactIng that = (ContactIng) o;
+        return id == that.id &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactIng withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactIng withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactIng  withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactIng  withStreet(String street) {
+        this.street = street;
+        return this;
+    }
+
+    public ContactIng  withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactIng  withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ContactIng withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+
+    public ContactIng  withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
     }
 
     @Override
@@ -76,19 +106,5 @@ public class ContactIng {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactIng that = (ContactIng) o;
-        return id == that.id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(lastname, that.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, lastname);
-    }
 }
 

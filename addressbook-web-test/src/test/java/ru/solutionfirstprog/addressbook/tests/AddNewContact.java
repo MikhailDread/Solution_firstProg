@@ -16,9 +16,7 @@ public class AddNewContact extends TestBase {
     Contacts before = applicationManager.contact().all();
     applicationManager.getGoTo().newContact();
     ContactIng contact = new ContactIng().withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1");
-    applicationManager.contact().creationContact(contact, true);
-    applicationManager.contact().submitCreation();
-    applicationManager.returned().homePage();
+    applicationManager.contact().create(contact, true);
     Contacts after = applicationManager.contact().all();
     assertThat(after.size(), equalTo(before.size()+1));
 

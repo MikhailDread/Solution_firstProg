@@ -69,7 +69,6 @@ public class GroupHelper extends Helperbase{
         returnToGroupPage();
     }
 
-
     public void delete(GroupInf group) {
         selectGroupById(group.getId());
         deleteGroup();

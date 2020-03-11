@@ -35,14 +35,16 @@ public class DeleteContact extends TestBase{
   public void testDeleteContact() throws Exception {
     Contacts before = applicationManager.contact().all();
     ContactIng deleteContact = before.iterator().next();
-    applicationManager.group().selectContactById(deleteContact.getId());
-    applicationManager.contact().delete();
-    applicationManager.returned().returnHome();
+    applicationManager.contact().delete(deleteContact);
     Contacts after = applicationManager.contact().all();
     assertThat(after.size(), equalTo(before.size() -1));
 
     assertThat(after, equalTo(before.without(deleteContact)));
   }
 
-
+  //private void delete(ContactIng deleteContact) {
+   // applicationManager.group().selectContactById(deleteContact.getId());
+    //applicationManager.contact().delete();
+  //  applicationManager.returned().returnHome();
+  //}
 }

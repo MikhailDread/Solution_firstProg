@@ -17,8 +17,11 @@ public class ContactHelper extends Helperbase {
 
     boolean acceptNextAlert = true;
 
-    public ContactHelper(WebDriver driver) {
+    ApplicationManager applicationManager;
+
+    public ContactHelper(WebDriver driver, ApplicationManager applicationManager) {
         super(driver);
+        this.applicationManager = applicationManager;
     }
 
     public void submitCreation() {
@@ -41,6 +44,20 @@ public class ContactHelper extends Helperbase {
 
     }
 
+    public void create(ContactIng contact, boolean usl) {
+        if(usl == true){
+        creationContact(contact, true);
+            submitCreation();
+            applicationManager.returned().homePage();
+        }
+        else if (usl == false){
+            creationContact(contact, false);
+            submit();
+            applicationManager.returned().homePage();
+        }
+    }
+
+
     public String closeAlertAndGetItsText() {
         try {
             Alert alert = driver.switchTo().alert();
@@ -59,6 +76,12 @@ public class ContactHelper extends Helperbase {
     public void delete() {
         click(By.xpath("//input[@value='Delete']"));
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    public void delete(ContactIng deleteContact) {
+        applicationManager.group().selectContactById(deleteContact.getId());
+        applicationManager.contact().delete();
+        applicationManager.returned().returnHome();
     }
 
     public void contactModification() {

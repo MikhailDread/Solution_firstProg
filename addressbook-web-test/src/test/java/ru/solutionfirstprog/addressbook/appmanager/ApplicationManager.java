@@ -32,7 +32,7 @@ public class ApplicationManager{
         groupHelper = new GroupHelper(driver);
         goTo = new NavigationClass(driver);
         sessionHelper  = new SessionHelper(driver);
-        contactHelper  = new ContactHelper(driver);
+        contactHelper  = new ContactHelper(driver,this);
         returnHelper = new ReturnHelper(driver);
         sessionHelper.login("admin", "secret");
     }

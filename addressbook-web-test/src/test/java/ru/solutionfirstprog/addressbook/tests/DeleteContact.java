@@ -42,9 +42,4 @@ public class DeleteContact extends TestBase{
     assertThat(after, equalTo(before.without(deleteContact)));
   }
 
-  //private void delete(ContactIng deleteContact) {
-   // applicationManager.group().selectContactById(deleteContact.getId());
-    //applicationManager.contact().delete();
-  //  applicationManager.returned().returnHome();
-  //}
 }

@@ -35,6 +35,7 @@ public class GroupHelper extends Helperbase{
         initGroupModification();
         creationGroup(group);
         submitGroupModification();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -66,24 +67,35 @@ public class GroupHelper extends Helperbase{
         initNewGroup();
         creationGroup(group);
         submitGroup();
+        groupCache = null;
         returnToGroupPage();
     }
 
     public void delete(GroupInf group) {
         selectGroupById(group.getId());
         deleteGroup();
+        groupCache = null;
         returnToGroupPage();
     }
 
+
+    private Groups groupCache = null;
+
     public Groups all() {
-        Groups group = new Groups();
+        if(groupCache != null){
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for(WebElement e : elements){
             String name = e.getText();
             int id = Integer.parseInt(e.findElement(By.tagName("input")).getAttribute("value"));
-            group.add(new GroupInf().withId(id).withName(name));
+            groupCache.add(new GroupInf().withId(id).withName(name));
         }
-        return group;
+        return new Groups(groupCache);
     }
 
+    public int count() {
+        return driver.findElements(By.name("selected[]")).size();
+    }
 }

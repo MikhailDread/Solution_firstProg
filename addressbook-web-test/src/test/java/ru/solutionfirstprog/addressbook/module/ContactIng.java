@@ -12,6 +12,14 @@ public class ContactIng {
     private String middlename;
     private String lastname;
     private String group;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhone;
+
+    public String getAllPhone() {
+        return allPhone;
+    }
 
     public String getCompany() {
         return company;
@@ -39,6 +47,18 @@ public class ContactIng {
 
     public String getGroup() {
         return group;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
     }
 
     @Override
@@ -96,6 +116,26 @@ public class ContactIng {
 
     public ContactIng  withLastname(String lastname) {
         this.lastname = lastname;
+        return this;
+    }
+
+    public ContactIng withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactIng withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactIng withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactIng withAllPhones(String allPhone) {
+        this.allPhone = allPhone;
         return this;
     }
 

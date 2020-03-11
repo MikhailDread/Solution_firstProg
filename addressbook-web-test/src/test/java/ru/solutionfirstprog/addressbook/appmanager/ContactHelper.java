@@ -113,11 +113,32 @@ public class ContactHelper extends Helperbase {
             List<WebElement> cells = e.findElements(By.tagName("td"));
             String name = cells.get(2).getText();
             String lastname = cells.get(1).getText();
+            String allPhones = cells.get(5).getText();
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).withMiddlename(null).withLastname(lastname).withGroup(null);
+            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).
+                    withMiddlename(null).withLastname(lastname).withGroup(null).withAllPhones(allPhones);
             list.add(cont);
         }
         return list;
     }
+
+    public ContactIng infoFromEditForm(ContactIng cont) {
+        initContactModificationById(cont.getId());
+        String name = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+        String home = driver.findElement(By.name("home")).getAttribute("value");
+        String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
+        String work = driver.findElement(By.name("work")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactIng().withId(cont.getId()).withName(name).withLastname(lastname).withHomePhone(home)
+.withMobilePhone(mobile).withWorkPhone(work);    }
+
+    private void initContactModificationById(int id) {
+        WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value ='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
+    }
+
 
 }

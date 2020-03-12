@@ -12,22 +12,22 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 
-public class testContactPhone extends TestBase {
+public class ContactEmailTest extends TestBase{
 
     @Test
-    public void testContactPhone(){
+    public void testContactEmail(){
         applicationManager.returned().returnHome();
         ContactIng cont = applicationManager.contact().all().iterator().next();
         ContactIng contactInfFromEditForm = applicationManager.contact().infoFromEditForm(cont);
-        assertThat(cont.getAllPhone(), equalTo(mergePhones(contactInfFromEditForm)));
+        assertThat(cont.getAllEmail(), equalTo(merge(contactInfFromEditForm)));
     }
 
-    private String mergePhones(ContactIng contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-                .stream().filter((s) -> !s.equals("")).map(testContactPhone::cleaned).collect(Collectors.joining("\n"));
+    public static String cleaned(String email){
+        return email.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 
-    public static String cleaned(String phone){
-       return phone.replaceAll("\\s", "").replaceAll("[-()]","");
+    public String merge(ContactIng contact){
+        return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> !equals(""))
+                .map(ContactEmailTest::cleaned).collect(Collectors.joining("\n"));
     }
 }

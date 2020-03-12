@@ -35,7 +35,7 @@ public class ContactModification extends TestBase {
         Contacts before = applicationManager.contact().all();
         ContactIng modifyContact = before.iterator().next();
         applicationManager.contact().contactModification();
-        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1");
+        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail1("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1");
         applicationManager.contact().create(contact, false);
         Contacts after = applicationManager.contact().all();
         assertThat(after.size(), equalTo(before.size()));

@@ -7,7 +7,7 @@ public class ContactIng {
     private int id = Integer.MAX_VALUE;;
     private String company;
     private String street;
-    private String email;
+    private String email1;
     private String name;
     private String middlename;
     private String lastname;
@@ -16,6 +16,10 @@ public class ContactIng {
     private String mobilePhone;
     private String workPhone;
     private String allPhone;
+    private String email2;
+    private String email3;
+    private String allEmail;
+
 
     public String getAllPhone() {
         return allPhone;
@@ -29,8 +33,8 @@ public class ContactIng {
         return street;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail1() {
+        return email1;
     }
 
     public String getName() {
@@ -59,6 +63,18 @@ public class ContactIng {
 
     public String getWorkPhone() {
         return workPhone;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public String getAllEmail() {
+        return allEmail;
     }
 
     @Override
@@ -99,8 +115,8 @@ public class ContactIng {
         return this;
     }
 
-    public ContactIng  withEmail(String email) {
-        this.email = email;
+    public ContactIng withEmail1(String email1) {
+        this.email1 = email1;
         return this;
     }
 
@@ -136,6 +152,21 @@ public class ContactIng {
 
     public ContactIng withAllPhones(String allPhone) {
         this.allPhone = allPhone;
+        return this;
+    }
+
+    public ContactIng withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactIng withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactIng withAllEmail(String allEmail) {
+        this.allEmail = allEmail;
         return this;
     }
 

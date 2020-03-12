@@ -31,7 +31,7 @@ public class ContactHelper extends Helperbase {
     public void creationContact(ContactIng contactIng, boolean creation) {
         type(By.name("company"), contactIng.getCompany());
         type(By.name("address"), contactIng.getStreet());
-        type(By.name("email"), contactIng.getEmail());
+        type(By.name("email"), contactIng.getEmail1());
         type(By.name("firstname"), contactIng.getName());
         type(By.name("middlename"), contactIng.getMiddlename());
         type(By.name("lastname"), contactIng.getLastname());
@@ -101,7 +101,7 @@ public class ContactHelper extends Helperbase {
 
     public void create() {
 
-        creationContact(new ContactIng().withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1"), true);
+        creationContact(new ContactIng().withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail1("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1"), true);
         submitCreation();
     }
 
@@ -114,9 +114,12 @@ public class ContactHelper extends Helperbase {
             String name = cells.get(2).getText();
             String lastname = cells.get(1).getText();
             String allPhones = cells.get(5).getText();
+            String address = cells.get(3).getText();
+            String allEmail = cells.get(4).getText();
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail(null).withName(name).
-                    withMiddlename(null).withLastname(lastname).withGroup(null).withAllPhones(allPhones);
+            ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail1(null).withName(name).
+                    withMiddlename(null).withLastname(lastname).withGroup(null).withAllPhones(allPhones)
+                    .withStreet(address).withAllEmail(allEmail);
             list.add(cont);
         }
         return list;
@@ -129,11 +132,15 @@ public class ContactHelper extends Helperbase {
         String home = driver.findElement(By.name("home")).getAttribute("value");
         String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
         String work = driver.findElement(By.name("work")).getAttribute("value");
+        String email1 = driver.findElement(By.name("email")).getAttribute("value");
+        String email2 = driver.findElement(By.name("email2")).getAttribute("value");
+        String email3 = driver.findElement(By.name("email3")).getAttribute("value");
+        String address = driver.findElement(By.cssSelector("textarea[name = 'address']")).getText();
         driver.navigate().back();
         return new ContactIng().withId(cont.getId()).withName(name).withLastname(lastname).withHomePhone(home)
-.withMobilePhone(mobile).withWorkPhone(work);    }
+.withMobilePhone(mobile).withWorkPhone(work).withEmail1(email1).withEmail2(email2).withEmail3(email3).withStreet(address);    }
 
-    private void initContactModificationById(int id) {
+    public void initContactModificationById(int id) {
         WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value ='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));

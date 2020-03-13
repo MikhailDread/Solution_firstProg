@@ -83,12 +83,13 @@ public class ContactIng {
         if (o == null || getClass() != o.getClass()) return false;
         ContactIng that = (ContactIng) o;
         return id == that.id &&
-                Objects.equals(name, that.name);
+                Objects.equals(name, that.name) &&
+                Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, lastname);
     }
 
     public int getId() {

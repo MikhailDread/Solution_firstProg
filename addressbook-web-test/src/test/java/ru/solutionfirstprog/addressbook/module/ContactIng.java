@@ -1,5 +1,6 @@
 package ru.solutionfirstprog.addressbook.module;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactIng {
@@ -19,6 +20,7 @@ public class ContactIng {
     private String email2;
     private String email3;
     private String allEmail;
+    private File photo;
 
 
     public String getAllPhone() {
@@ -75,6 +77,10 @@ public class ContactIng {
 
     public String getAllEmail() {
         return allEmail;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     @Override
@@ -168,6 +174,11 @@ public class ContactIng {
 
     public ContactIng withAllEmail(String allEmail) {
         this.allEmail = allEmail;
+        return this;
+    }
+
+    public ContactIng withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 

@@ -35,6 +35,7 @@ public class ContactHelper extends Helperbase {
         type(By.name("firstname"), contactIng.getName());
         type(By.name("middlename"), contactIng.getMiddlename());
         type(By.name("lastname"), contactIng.getLastname());
+        attach(By.name("photo"), contactIng.getPhoto());
 
         if (creation) {
             new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactIng.getGroup());

@@ -31,8 +31,8 @@ public class GroupinfGenerator {
     private static List<GroupInf> generateGroup(int count) {
         List<GroupInf> groups = new ArrayList<>();
         for(int i = 0; i < count; i++){
-            groups.add(new GroupInf().withName(String.format("test" + i))
-                    .withHeader(String.format("test" + i)).withFeeder(String.format("test" + i)));
+            groups.add(new GroupInf().withName(String.format("name is " + i))
+                    .withHeader(String.format("header is" + i)).withFeeder(String.format("footer is" + i)));
         }
         return groups;
     }

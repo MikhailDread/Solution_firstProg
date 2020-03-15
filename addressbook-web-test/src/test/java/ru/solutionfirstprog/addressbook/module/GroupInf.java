@@ -1,8 +1,13 @@
 package ru.solutionfirstprog.addressbook.module;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("group")
 public class GroupInf {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
     private  String name;
     private  String header;

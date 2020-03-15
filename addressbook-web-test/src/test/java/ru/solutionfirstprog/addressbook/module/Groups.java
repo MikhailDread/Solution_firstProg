@@ -2,7 +2,6 @@ package ru.solutionfirstprog.addressbook.module;
 
 import com.google.common.collect.ForwardingSet;
 
-import java.security.acl.Group;
 import java.util.HashSet;
 import java.util.Set;
 

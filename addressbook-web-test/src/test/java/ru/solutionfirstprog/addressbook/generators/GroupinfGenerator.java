@@ -3,6 +3,8 @@ package ru.solutionfirstprog.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
@@ -43,9 +45,19 @@ public class GroupinfGenerator {
         saveCSV(group, new File(file)); }
         else if(format.equals("xml")){
             saveXML(group, new File(file));
+        } else if(format.equals("json")){
+            saveJSON(group, new File(file));
         } else {
             System.out.println("Unrecognized format " + format);
         }
+    }
+
+    private void saveJSON(List<GroupInf> group, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(group);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
     }
 
     private void saveXML(List<GroupInf> group, File file) throws IOException {

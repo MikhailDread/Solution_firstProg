@@ -1,13 +1,9 @@
 package ru.solutionfirstprog.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 

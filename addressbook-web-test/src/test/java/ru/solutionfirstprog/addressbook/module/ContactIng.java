@@ -1,10 +1,15 @@
 package ru.solutionfirstprog.addressbook.module;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class ContactIng {
 
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
     private String company;
     private String street;

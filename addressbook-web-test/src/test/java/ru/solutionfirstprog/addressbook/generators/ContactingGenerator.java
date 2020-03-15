@@ -20,6 +20,7 @@ public class ContactingGenerator {
     @Parameter(names = "-f", description = "Target file")
     public String file;
 
+
     public static void main(String[] args) throws IOException {
         ContactingGenerator contactingGenerator = new ContactingGenerator();
         JCommander jCommander = new JCommander(contactingGenerator);

@@ -22,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class NewGroup extends TestBase {
     @DataProvider
     public Iterator<Object[]> validGroupsJSON() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")));
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")))){
         String json = "";
         String line = reader.readLine();
         while(line != null){
@@ -31,13 +31,13 @@ public class NewGroup extends TestBase {
         }
         Gson gson = new Gson();
         List<GroupInf> group = gson.fromJson(json, new TypeToken<List<GroupInf>>() {}.getType());
-        return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+        return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();}
     }
 
 
   @DataProvider
   public Iterator<Object[]> validGroups() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")));
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")))){
     String xml = "";
     String line = reader.readLine();
     while(line != null){
@@ -47,7 +47,7 @@ public class NewGroup extends TestBase {
       XStream xstream = new XStream();
     xstream.processAnnotations(GroupInf.class);
       List<GroupInf> group = (List<GroupInf>)xstream.fromXML(xml);
-     return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+     return group.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();}
   }
   @Test(dataProvider = "validGroups")
   public void testUntitledTestCase(GroupInf group) throws Exception {

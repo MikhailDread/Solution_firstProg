@@ -55,9 +55,9 @@ public class GroupinfGenerator {
     private void saveJSON(List<GroupInf> group, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(group);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveXML(List<GroupInf> group, File file) throws IOException {
@@ -65,17 +65,16 @@ public class GroupinfGenerator {
         xstream.processAnnotations(GroupInf.class);
         xstream.alias("group", GroupInf.class);
         String xml = xstream.toXML(group);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)){
+            writer.write(xml);
+        }
     }
 
     private  void saveCSV(List<GroupInf> group, File file) throws IOException {
-        Writer writer = new FileWriter(file);
+        try (Writer writer = new FileWriter(file)) {
         for(GroupInf e : group){
             writer.write(String.format(e.getName() + ";" + e.getHeader() + ";" + e.getFeeder() + "\n"));
-        }
-        writer.close();
+        } }
     }
 
     private  List<GroupInf> generateGroup(int count) {

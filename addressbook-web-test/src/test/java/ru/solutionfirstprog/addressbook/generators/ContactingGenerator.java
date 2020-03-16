@@ -54,18 +54,16 @@ public class ContactingGenerator {
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactIng.class);
         String xml = xStream.toXML(contact);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+        writer.write(xml);}
     }
 
     private void saveAsCSV(List<ContactIng> contact, File file) throws IOException {
-        Writer writer = new FileWriter(file);
+        try (Writer writer = new FileWriter(file)) {
         for(ContactIng e : contact){
             writer.write(String.format(e.getName() + ";" + e.getMiddlename() + ";" + e.getLastname()
                     + ";" + e.getGroup() + ";" + e.getStreet() + ";" + e.getEmail1() + "\n"));
-        }
-        writer.close();
+        }}
         }
 
     private List<ContactIng> generatorContact(int count) {

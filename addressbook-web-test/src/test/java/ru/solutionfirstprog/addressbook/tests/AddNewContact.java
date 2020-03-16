@@ -19,7 +19,7 @@ public class AddNewContact extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/contacts.xml")));
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/contacts.xml")))){
     String xml = "";
     String line = reader.readLine();
     while (line != null) {
@@ -29,7 +29,7 @@ public class AddNewContact extends TestBase {
     XStream xStream = new XStream();
     xStream.processAnnotations(ContactIng.class);
     List <ContactIng> contacts = (List <ContactIng>) xStream.fromXML(xml);
-    return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+    return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();}
   }
 
   @Test(dataProvider = "validContacts")

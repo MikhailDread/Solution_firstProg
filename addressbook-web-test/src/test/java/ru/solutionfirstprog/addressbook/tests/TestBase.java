@@ -7,7 +7,8 @@ import ru.solutionfirstprog.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected static final ApplicationManager applicationManager = new ApplicationManager(BrowserType.CHROME);
+    protected static final ApplicationManager applicationManager =
+            new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {

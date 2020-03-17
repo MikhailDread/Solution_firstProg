@@ -1,0 +1,29 @@
+<list>
+  <contact>
+    <company>RZD</company>
+    <street>street Pushkin</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>test 1 0</name>
+    <middlename>test 2 0</middlename>
+    <lastname>test 3 0</lastname>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <company>RZD</company>
+    <street>street Pushkin</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>test 1 1</name>
+    <middlename>test 2 1</middlename>
+    <lastname>test 3 1</lastname>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <company>RZD</company>
+    <street>street Pushkin</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>test 1 2</name>
+    <middlename>test 2 2</middlename>
+    <lastname>test 3 2</lastname>
+    <group>test1</group>
+  </contact>
+</list>

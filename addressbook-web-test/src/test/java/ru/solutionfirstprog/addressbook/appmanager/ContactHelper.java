@@ -142,10 +142,7 @@ public class ContactHelper extends Helperbase {
 .withMobilePhone(mobile).withWorkPhone(work).withEmail1(email1).withEmail2(email2).withEmail3(email3).withStreet(address);    }
 
     public void initContactModificationById(int id) {
-        WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value ='%s']", id)));
-        WebElement row = checkbox.findElement(By.xpath("./../.."));
-        List<WebElement> cells = row.findElements(By.tagName("td"));
-        cells.get(7).findElement(By.tagName("a")).click();
+        driver.findElement((By.cssSelector("a[href*='edit.php?id=" + id + "']"))).click();
     }
 
 

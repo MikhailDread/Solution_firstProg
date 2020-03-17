@@ -8,10 +8,10 @@ public class SessionHelper extends Helperbase{
 
     public SessionHelper(WebDriver driver){
         super(driver);
+
     }
 
     public void login(String log, String password) {
-        driver.get("http://localhost/addressbook/group.php?new=New+group");
         type(By.name("user"), log);
         type(By.name("pass"), password);
         submit(By.id("LoginForm"));

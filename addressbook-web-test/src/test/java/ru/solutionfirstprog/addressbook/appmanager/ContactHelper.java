@@ -9,19 +9,27 @@ import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends Helperbase {
 
+    private final Properties properties;
     boolean acceptNextAlert = true;
 
     ApplicationManager applicationManager;
 
-    public ContactHelper(WebDriver driver, ApplicationManager applicationManager) {
+    public ContactHelper(WebDriver driver, ApplicationManager applicationManager) throws IOException {
         super(driver);
         this.applicationManager = applicationManager;
+        properties = new Properties();
+        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
     }
 
     public void submitCreation() {
@@ -100,9 +108,10 @@ public class ContactHelper extends Helperbase {
     }
 
 
-    public void create() {
-
-        creationContact(new ContactIng().withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail1("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1"), true);
+    public void create(){
+        creationContact(new ContactIng().withName(properties.getProperty("web.name"))
+                .withMiddlename(properties.getProperty("web.middleName")).withLastname(properties.getProperty("web.lastName")).withCompany(properties.getProperty("web.company")).withStreet(properties.getProperty("web.street"))
+                .withEmail1(properties.getProperty("web.email")).withGroup(properties.getProperty("web.group")), true);
         submitCreation();
     }
 

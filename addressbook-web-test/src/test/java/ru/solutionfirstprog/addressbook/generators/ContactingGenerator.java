@@ -4,17 +4,17 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
+import ru.solutionfirstprog.addressbook.appmanager.ContactHelper;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ContactingGenerator {
 
+    private static Properties properties;
     @Parameter(names = "-c", description = "Contact count")
     public int count;
 
@@ -27,6 +27,8 @@ public class ContactingGenerator {
 
     public static void main(String[] args) throws IOException {
         ContactingGenerator contactingGenerator = new ContactingGenerator();
+        properties = new Properties();
+        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
         JCommander jCommander = new JCommander(contactingGenerator);
         try {
             jCommander.parse(args);
@@ -69,8 +71,9 @@ public class ContactingGenerator {
     private List<ContactIng> generatorContact(int count) {
         List<ContactIng> contact = new ArrayList<>();
         for(int i = 0; i < count; i++){
-            contact.add(new ContactIng().withName("test 1 " + i).withMiddlename("test 2 " + i)
-            .withLastname("test 3 " + i).withCompany("RZD").withStreet("street Pushkin").withEmail1("jonjolli@yandex.fu").withGroup("test1"));
+            contact.add(new ContactIng().withName(properties.getProperty("web.name")).withMiddlename(properties.getProperty("web.middleName"))
+            .withLastname(properties.getProperty("web.lastName")).withCompany(properties.getProperty("web.company"))
+                    .withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email")).withGroup(properties.getProperty("web.group")));
         }
 
         return contact;

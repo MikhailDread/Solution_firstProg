@@ -5,6 +5,9 @@ import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,7 @@ public class ContactPhoneTest extends TestBase {
         applicationManager.getGoTo().groupPage();
 
         if(applicationManager.contact().all().size() == 0){
+          //  properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
             applicationManager.group().create(new GroupInf().withName("test1").withFeeder("test2").withHeader("test3"));
         }
         applicationManager.returned().returnHome();

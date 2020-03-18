@@ -6,11 +6,19 @@ import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactModification extends TestBase {
+
+    private Properties properties;
 
     @BeforeMethod
     public void ensurePrecondotions(){
@@ -30,12 +38,13 @@ public class ContactModification extends TestBase {
 
 
     @Test
-    public void testContactModification(){
-
+    public void testContactModification() throws IOException {
+        properties = new Properties();
+        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
         Contacts before = applicationManager.contact().all();
         ContactIng modifyContact = before.iterator().next();
         applicationManager.contact().contactModification();
-        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany("RZD").withStreet("Moscow, street Tambovskaya.").withEmail1("jonjolli@yandex.fu").withName("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withGroup("test1");
+        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany(properties.getProperty("web.company")).withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email")).withName(properties.getProperty("web.name")).withMiddlename(properties.getProperty("web.middleName")).withLastname(properties.getProperty("web.lastName")).withGroup(properties.getProperty("web.group"));
         applicationManager.contact().create(contact, false);
         Contacts after = applicationManager.contact().all();
         assertThat(after.size(), equalTo(before.size()));

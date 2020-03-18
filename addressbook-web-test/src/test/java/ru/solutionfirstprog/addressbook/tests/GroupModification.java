@@ -4,6 +4,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
+
+import java.io.File;
+import java.io.FileReader;
+
 import static org.testng.Assert.assertEquals;
 
 
@@ -19,6 +23,7 @@ public class GroupModification extends TestBase {
 
     @Test
     public void testGroupModification(){
+        //properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
         Groups before = applicationManager.group().all();
         GroupInf modyfiyGroup = before.iterator().next();
         GroupInf group = new GroupInf().withId(modyfiyGroup.getId()).withName("test1").withFeeder("test1").withHeader("test1");

@@ -43,8 +43,11 @@ public class ContactModification extends TestBase {
         properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
         Contacts before = applicationManager.contact().all();
         ContactIng modifyContact = before.iterator().next();
-        applicationManager.contact().contactModification();
-        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany(properties.getProperty("web.company")).withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email")).withName(properties.getProperty("web.name")).withMiddlename(properties.getProperty("web.middleName")).withLastname(properties.getProperty("web.lastName")).withGroup(properties.getProperty("web.group"));
+        applicationManager.contact().initContactModificationById(modifyContact.getId());
+        ContactIng contact = new ContactIng().withId(modifyContact.getId()).withCompany(properties.getProperty("web.company"))
+                .withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email"))
+                .withName(properties.getProperty("web.name")).withMiddlename(properties.getProperty("web.middleName"))
+                .withLastname(properties.getProperty("web.lastName"));
         applicationManager.contact().create(contact, false);
         Contacts after = applicationManager.contact().all();
         assertThat(after.size(), equalTo(before.size()));

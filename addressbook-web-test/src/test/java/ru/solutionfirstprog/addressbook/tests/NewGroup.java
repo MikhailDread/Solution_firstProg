@@ -14,12 +14,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class NewGroup extends TestBase {
+    private Properties properties;
+
     @DataProvider
     public Iterator<Object[]> validGroupsJSON() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")))){
@@ -64,10 +67,12 @@ public class NewGroup extends TestBase {
 
   @Test
   public void testBadUntitledTestCase() throws Exception {
-      //properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+        properties = new Properties();
+      properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
     applicationManager.getGoTo().groupPage();
     Groups before = applicationManager.group().all();
-    GroupInf group = new GroupInf().withName("test2'").withFeeder("test2").withHeader("test2");
+    GroupInf group = new GroupInf().withName(properties.getProperty("web.nameGroup"))
+            .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header"));
     applicationManager.group().create(group);
     assertThat(applicationManager.group().count(), equalTo(before.size()));
     Groups after = applicationManager.group().all();

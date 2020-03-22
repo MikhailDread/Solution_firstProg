@@ -31,10 +31,10 @@ public class DeleteGroup extends TestBase{
 
   @Test
   public void testDeleteGroup(){
-    Groups before = applicationManager.group().all();
+    Groups before = applicationManager.db().groups();
     GroupInf deletedGroup = before.iterator().next();
     applicationManager.group().delete(deletedGroup);
-    Groups after = applicationManager.group().all();
+    Groups after = applicationManager.db().groups();
     //assertThat(applicationManager.group().count(), equalTo(before.without(deletedGroup)));
     assertEquals(after.size(), before.size() - 1);
 

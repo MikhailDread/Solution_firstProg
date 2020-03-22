@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
+import ru.solutionfirstprog.addressbook.module.Contacts;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
 
@@ -32,5 +33,14 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
+    }
+
+    public Contacts contacts(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactIng> result = session.createQuery("from ContactIng").list();
+        session.getTransaction().commit();
+        session.close();
+        return new Contacts(result);
     }
 }

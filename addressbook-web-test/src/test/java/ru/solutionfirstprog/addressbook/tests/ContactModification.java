@@ -20,12 +20,15 @@ public class ContactModification extends TestBase {
 
     private Properties properties;
 
-    @BeforeMethod
-    public void ensurePrecondotions(){
-        applicationManager.getGoTo().groupPage();
 
+    @BeforeMethod
+    public void ensurePrecondotions() throws IOException {
+        properties = new Properties();
+        properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
+        applicationManager.getGoTo().groupPage();
         if(applicationManager.contact().all().size() == 0){
-            applicationManager.group().create(new GroupInf().withName("test1").withFeeder("test2").withHeader("test3"));
+            applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))
+                    .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header")));
         }
         applicationManager.returned().returnHome();
         if(!applicationManager.contact().thereAContact()){

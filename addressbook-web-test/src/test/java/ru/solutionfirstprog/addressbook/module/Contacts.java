@@ -2,7 +2,9 @@ package ru.solutionfirstprog.addressbook.module;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Contacts extends ForwardingSet<ContactIng> {
@@ -12,6 +14,10 @@ public class Contacts extends ForwardingSet<ContactIng> {
 
     public Contacts() {
         this.delegate = new HashSet<>();
+    }
+
+    public Contacts(Collection<ContactIng> contact) {
+        this.delegate = new HashSet<>(contact);
     }
 
     @Override

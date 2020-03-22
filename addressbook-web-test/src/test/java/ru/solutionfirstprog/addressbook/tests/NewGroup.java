@@ -40,7 +40,7 @@ public class NewGroup extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroups() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/groups.xml")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))){
     String xml = "";
     String line = reader.readLine();
     while(line != null){
@@ -55,10 +55,10 @@ public class NewGroup extends TestBase {
   @Test(dataProvider = "validGroups")
   public void testUntitledTestCase(GroupInf group) throws Exception {
       applicationManager.getGoTo().groupPage();
-      Groups before = applicationManager.group().all();
+      Groups before = applicationManager.db().groups();
       applicationManager.group().create(group);
       assertThat(applicationManager.group().count(), equalTo(before.size() + 1));
-      Groups after = applicationManager.group().all();
+      Groups after = applicationManager.db().groups();
 
 
       assertThat(after, equalTo(
@@ -70,12 +70,12 @@ public class NewGroup extends TestBase {
         properties = new Properties();
       properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     applicationManager.getGoTo().groupPage();
-    Groups before = applicationManager.group().all();
+    Groups before = applicationManager.db().groups();
     GroupInf group = new GroupInf().withName(properties.getProperty("web.nameGroup"))
             .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header"));
     applicationManager.group().create(group);
     assertThat(applicationManager.group().count(), equalTo(before.size()));
-    Groups after = applicationManager.group().all();
+    Groups after = applicationManager.db().groups();
 
 
     assertThat(after, equalTo(before));

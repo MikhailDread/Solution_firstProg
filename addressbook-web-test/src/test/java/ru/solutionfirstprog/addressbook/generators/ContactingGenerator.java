@@ -28,7 +28,7 @@ public class ContactingGenerator {
     public static void main(String[] args) throws IOException {
         ContactingGenerator contactingGenerator = new ContactingGenerator();
         properties = new Properties();
-        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
         JCommander jCommander = new JCommander(contactingGenerator);
         try {
             jCommander.parse(args);

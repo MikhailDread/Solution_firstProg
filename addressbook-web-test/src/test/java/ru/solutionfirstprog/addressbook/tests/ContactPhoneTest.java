@@ -25,7 +25,7 @@ public class ContactPhoneTest extends TestBase {
     @BeforeMethod
     public void ensurePrecondotions() throws IOException {
         properties = new Properties();
-        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
         applicationManager.getGoTo().groupPage();
 
         if(applicationManager.contact().all().size() == 0){

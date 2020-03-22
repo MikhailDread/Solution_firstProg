@@ -1,0 +1,29 @@
+<list>
+  <contact>
+    <company>RZD</company>
+    <street>Moscow, street Tambovskaya.</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>Ivan</name>
+    <middlename>Ivanovich</middlename>
+    <lastname>Ivanov</lastname>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <company>RZD</company>
+    <street>Moscow, street Tambovskaya.</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>Ivan</name>
+    <middlename>Ivanovich</middlename>
+    <lastname>Ivanov</lastname>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <company>RZD</company>
+    <street>Moscow, street Tambovskaya.</street>
+    <email1>jonjolli@yandex.fu</email1>
+    <name>Ivan</name>
+    <middlename>Ivanovich</middlename>
+    <lastname>Ivanov</lastname>
+    <group>test1</group>
+  </contact>
+</list>

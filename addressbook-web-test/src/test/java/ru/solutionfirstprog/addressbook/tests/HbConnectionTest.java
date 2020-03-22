@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 
 import java.util.List;
@@ -36,9 +37,9 @@ public class HbConnectionTest {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupInf> result = session.createQuery( "from GroupInf" ).list();
-        for (GroupInf group : result) {
-            System.out.println(group);
+        List<ContactIng> result = session.createQuery("from ContactIng where deprecated = '0000-00-00'").list();
+        for (ContactIng cont : result) {
+            System.out.println(cont);
         }
         session.getTransaction().commit();
         session.close();

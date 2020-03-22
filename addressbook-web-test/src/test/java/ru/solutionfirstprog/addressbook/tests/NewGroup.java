@@ -68,7 +68,7 @@ public class NewGroup extends TestBase {
   @Test
   public void testBadUntitledTestCase() throws Exception {
         properties = new Properties();
-      properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+      properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     applicationManager.getGoTo().groupPage();
     Groups before = applicationManager.group().all();
     GroupInf group = new GroupInf().withName(properties.getProperty("web.nameGroup"))

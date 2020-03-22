@@ -40,7 +40,7 @@ public class ContactModification extends TestBase {
     @Test
     public void testContactModification() throws IOException {
         properties = new Properties();
-        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
         Contacts before = applicationManager.contact().all();
         ContactIng modifyContact = before.iterator().next();
         applicationManager.contact().initContactModificationById(modifyContact.getId());

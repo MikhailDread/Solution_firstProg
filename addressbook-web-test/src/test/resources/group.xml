@@ -1,0 +1,23 @@
+<list>
+  <group>
+    <name>name is 0</name>
+    <header>header is
+0</header>
+    <feeder>footer is
+0</feeder>
+  </group>
+  <group>
+    <name>name is 1</name>
+    <header>header is
+1</header>
+    <feeder>footer is
+1</feeder>
+  </group>
+  <group>
+    <name>name is 2</name>
+    <header>header is
+2</header>
+    <feeder>footer is
+2</feeder>
+  </group>
+</list>

@@ -21,7 +21,7 @@ public class DeleteGroup extends TestBase{
   @BeforeMethod
   public void ensurePrecondotions() throws IOException {
     properties = new Properties();
-    properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+    properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     applicationManager.getGoTo().groupPage();
     if(applicationManager.group().all().size() == 0){
       applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))

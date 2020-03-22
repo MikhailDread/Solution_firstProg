@@ -19,7 +19,7 @@ public class AddNewContact extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/resourse/contacts.xml")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))){
     String xml = "";
     String line = reader.readLine();
     while (line != null) {

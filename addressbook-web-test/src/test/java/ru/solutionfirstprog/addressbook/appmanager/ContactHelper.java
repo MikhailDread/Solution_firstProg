@@ -28,7 +28,7 @@ public class ContactHelper extends Helperbase {
         super(driver);
         this.applicationManager = applicationManager;
         properties = new Properties();
-        properties.load(new FileReader(new File(String.format("src/test/java/resourse/local.properties"))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     }
 
     public void submitCreation() {

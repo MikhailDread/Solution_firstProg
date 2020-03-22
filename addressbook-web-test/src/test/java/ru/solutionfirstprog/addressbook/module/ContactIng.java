@@ -2,30 +2,70 @@ package ru.solutionfirstprog.addressbook.module;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactIng {
 
     @XStreamOmitField
-    private int id = Integer.MAX_VALUE;;
+    @Id
+    @Column(name = "id")
+    private int id = Integer.MAX_VALUE;
+
+    @Transient
     private String company;
+
+    @Transient
     private String street;
+
+    @Transient
     private String email1;
+
+    @Column(name = "firstname")
     private String name;
+
+    @Transient
     private String middlename;
+
+    @Column(name = "lastname")
     private String lastname;
+
+    @Transient
     private String group;
+
+    @Column(name = "home")
+    @Type(type ="text")
     private String homePhone;
+
+    @Column(name = "mobile")
+    @Type(type ="text")
     private String mobilePhone;
+
+    @Column(name = "work")
+    @Type(type ="text")
     private String workPhone;
+
+    @Transient
     private String allPhone;
+
+    @Transient
     private String email2;
+
+    @Transient
     private String email3;
+
+    @Transient
     private String allEmail;
-    private File photo;
+
+    @Column(name = "photo")
+    @Type(type ="text")
+    private String photo;
 
 
     public String getAllPhone() {
@@ -85,7 +125,7 @@ public class ContactIng {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
@@ -183,7 +223,7 @@ public class ContactIng {
     }
 
     public ContactIng withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 

@@ -2,8 +2,7 @@ package ru.solutionfirstprog.addressbook.module;
 
 import com.google.common.collect.ForwardingSet;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Groups extends ForwardingSet<GroupInf> {
 
@@ -15,6 +14,10 @@ public class Groups extends ForwardingSet<GroupInf> {
 
     public Groups() {
         this.delegate = new HashSet<>();
+    }
+
+    public Groups(Collection<GroupInf> groups) {
+        this.delegate = new HashSet<>(groups);
     }
 
 

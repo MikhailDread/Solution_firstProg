@@ -74,12 +74,14 @@ public class GroupInf {
         if (o == null || getClass() != o.getClass()) return false;
         GroupInf groupInf = (GroupInf) o;
         return id == groupInf.id &&
-                Objects.equals(name, groupInf.name);
+                Objects.equals(name, groupInf.name) &&
+                Objects.equals(header, groupInf.header) &&
+                Objects.equals(feeder, groupInf.feeder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, header, feeder);
     }
 
     @Override

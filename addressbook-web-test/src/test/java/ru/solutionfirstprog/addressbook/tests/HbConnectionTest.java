@@ -40,6 +40,7 @@ public class HbConnectionTest {
         List<ContactIng> result = session.createQuery("from ContactIng where deprecated = '0000-00-00'").list();
         for (ContactIng cont : result) {
             System.out.println(cont);
+            System.out.println(cont.getGroups());
         }
         session.getTransaction().commit();
         session.close();

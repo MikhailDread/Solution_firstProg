@@ -47,6 +47,7 @@ public class GroupModification extends TestBase {
         assertEquals(after.size(), before.size());
         //assertThat(applicationManager.group().count(), equalTo(before.without(modyfiyGroup).withAdded(group)));
 
+        verifyGroupListInUI();
     }
 
 }

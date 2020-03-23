@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
+import ru.solutionfirstprog.addressbook.module.GroupInf;
+import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.io.File;
 import java.io.FileReader;
@@ -45,7 +47,9 @@ public class ContactHelper extends Helperbase {
         attach(By.name("photo"), contactIng.getPhoto());
 
         if (creation) {
-            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactIng.getGroup());
+            if(contactIng.getGroups().size() > 0){
+                Assert.assertTrue(contactIng.getGroups().size() == 1);
+            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactIng.getGroups().iterator().next().getName());}
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -108,9 +112,10 @@ public class ContactHelper extends Helperbase {
 
 
     public void create(){
+        Groups groups = applicationManager.db().groups();
         creationContact(new ContactIng().withName(properties.getProperty("web.name"))
                 .withMiddlename(properties.getProperty("web.middleName")).withLastname(properties.getProperty("web.lastName")).withCompany(properties.getProperty("web.company")).withStreet(properties.getProperty("web.street"))
-                .withEmail1(properties.getProperty("web.email")).withGroup(properties.getProperty("web.group")), true);
+                .withEmail1(properties.getProperty("web.email")).inGroup(groups.iterator().next()), true);
         submitCreation();
     }
 
@@ -127,7 +132,7 @@ public class ContactHelper extends Helperbase {
             String allEmail = cells.get(4).getText();
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             ContactIng cont = new ContactIng().withId(id).withCompany(null).withStreet(null).withEmail1(null).withName(name).
-                    withMiddlename(null).withLastname(lastname).withGroup(null).withAllPhones(allPhones)
+                    withMiddlename(null).withLastname(lastname).inGroup(null).withAllPhones(allPhones)
                     .withStreet(address).withAllEmail(allEmail);
             list.add(cont);
         }

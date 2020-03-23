@@ -27,7 +27,7 @@ public class DeleteContact extends TestBase{
     properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     applicationManager.getGoTo().groupPage();
 
-    if(applicationManager.group().all().size() == 0){
+    if(applicationManager.db().groups().size() == 0){
     applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup")));
   }
     applicationManager.returned().returnHome();
@@ -42,10 +42,10 @@ public class DeleteContact extends TestBase{
 
   @Test
   public void testDeleteContact() throws Exception {
-    Contacts before = applicationManager.contact().all();
+    Contacts before = applicationManager.db().contacts();
     ContactIng deleteContact = before.iterator().next();
     applicationManager.contact().delete(deleteContact);
-    Contacts after = applicationManager.contact().all();
+    Contacts after = applicationManager.db().contacts();
     assertThat(after.size(), equalTo(before.size() -1));
 
     assertThat(after, equalTo(before.without(deleteContact)));

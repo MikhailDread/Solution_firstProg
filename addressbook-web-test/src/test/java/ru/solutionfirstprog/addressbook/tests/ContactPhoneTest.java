@@ -28,7 +28,7 @@ public class ContactPhoneTest extends TestBase {
         properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
         applicationManager.getGoTo().groupPage();
 
-        if(applicationManager.contact().all().size() == 0){
+        if(applicationManager.db().groups().size() == 0){
             applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))
                     .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header")));
         }

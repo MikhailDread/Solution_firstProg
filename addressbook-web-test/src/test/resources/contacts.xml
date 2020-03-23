@@ -7,6 +7,7 @@
     <middlename>Ivanovich</middlename>
     <lastname>Ivanov</lastname>
     <group>test1</group>
+    <photo>src/test/resources/1600px-This_wolf_still_has_teeth_(2).png</photo>
   </contact>
   <contact>
     <company>RZD</company>
@@ -16,6 +17,7 @@
     <middlename>Ivanovich</middlename>
     <lastname>Ivanov</lastname>
     <group>test1</group>
+    <photo>src/test/resources/1600px-This_wolf_still_has_teeth_(2).png</photo>
   </contact>
   <contact>
     <company>RZD</company>
@@ -25,5 +27,6 @@
     <middlename>Ivanovich</middlename>
     <lastname>Ivanov</lastname>
     <group>test1</group>
+    <photo>src/test/resources/1600px-This_wolf_still_has_teeth_(2).png</photo>
   </contact>
 </list>

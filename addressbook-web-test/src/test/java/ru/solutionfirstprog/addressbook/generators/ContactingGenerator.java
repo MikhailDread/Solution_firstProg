@@ -15,6 +15,7 @@ import java.util.Properties;
 public class ContactingGenerator {
 
     private static Properties properties;
+
     @Parameter(names = "-c", description = "Contact count")
     public int count;
 
@@ -73,7 +74,8 @@ public class ContactingGenerator {
         for(int i = 0; i < count; i++){
             contact.add(new ContactIng().withName(properties.getProperty("web.name")).withMiddlename(properties.getProperty("web.middleName"))
             .withLastname(properties.getProperty("web.lastName")).withCompany(properties.getProperty("web.company"))
-                    .withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email")).withGroup(properties.getProperty("web.group")));
+                    .withStreet(properties.getProperty("web.street")).withEmail1(properties.getProperty("web.email"))
+                    .withGroup(properties.getProperty("web.group")).withPhoto(new File("src/test/resources/1600px-This_wolf_still_has_teeth_(2).png")));
         }
 
         return contact;

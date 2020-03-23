@@ -20,7 +20,7 @@ public class ContactAddressTest extends TestBase{
     public void ensurePrecondotions(){
         applicationManager.getGoTo().groupPage();
 
-        if(applicationManager.contact().all().size() == 0){
+        if(applicationManager.db().contacts().size() == 0){
             applicationManager.group().create(new GroupInf().withName("test1").withFeeder("test2").withHeader("test3"));
         }
         applicationManager.returned().returnHome();

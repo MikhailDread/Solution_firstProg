@@ -35,10 +35,10 @@ public class AddNewContact extends TestBase {
   @Test(dataProvider = "validContacts")
   public void testAddNewContact(ContactIng contact) throws Exception {
     applicationManager.returned().returnHome();
-    Contacts before = applicationManager.contact().all();
+    Contacts before = applicationManager.db().contacts();
     applicationManager.getGoTo().newContact();
     applicationManager.contact().create(contact, true);
-    Contacts after = applicationManager.contact().all();
+    Contacts after = applicationManager.db().contacts();
     assertThat(after.size(), equalTo(before.size()+1));
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));

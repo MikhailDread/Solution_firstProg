@@ -159,4 +159,19 @@ public class ContactHelper extends Helperbase {
     }
 
 
+    public void addInGroup() {
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.name("to_group")).click();
+        driver.findElement(By.name("add")).click();
+        applicationManager.returned().returnHome();
+    }
+
+    public void deletedGroup() {
+        driver.findElement(By.linkText("home")).click();
+        driver.findElement(By.name("group")).click();
+        new Select(driver.findElement(By.name("group"))).selectByVisibleText("test1");
+        driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.name("remove")).click();
+        driver.findElement(By.linkText("home")).click();
+    }
 }

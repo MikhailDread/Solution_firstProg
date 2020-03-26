@@ -19,6 +19,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactAddedGroupTest extends TestBase {
 
     private Properties properties;
@@ -67,6 +72,9 @@ public class ContactAddedGroupTest extends TestBase {
 
         //   }
 
+        applicationManager.getGoTo().groupPage();
+        GroupInf groups = applicationManager.group().all().iterator().next();
+        System.out.println("Groups " + groups);
         applicationManager.returned().returnHome();
 
         ContactIng before = null;
@@ -75,7 +83,7 @@ public class ContactAddedGroupTest extends TestBase {
         for (ContactIng b : beforeCnts) {
             before = b;
         }
-        applicationManager.contact().addInGroup(added.getId());
+        applicationManager.contact().addInGroup(added.getId(), groups.getId());
         ContactIng after = null;
         List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
         for (ContactIng a : afterCnts) {
@@ -87,5 +95,8 @@ public class ContactAddedGroupTest extends TestBase {
         }
           System.out.println("Before " + before.getGroups().size());
           System.out.println("After " + after.getGroups().size());
+          System.out.println("Added " + added);
+
+        //assertThat(after.getGroups(), equalTo(before.getGroups().withAdded(added.withId())));
     }
 }

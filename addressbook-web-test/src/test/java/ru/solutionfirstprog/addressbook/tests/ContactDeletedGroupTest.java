@@ -1,5 +1,6 @@
 package ru.solutionfirstprog.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 public class ContactDeletedGroupTest extends TestBase{
@@ -39,10 +41,24 @@ public class ContactDeletedGroupTest extends TestBase{
     public void testDeletedGroup(){
         Groups groups = applicationManager.db().groups();
         applicationManager.returned().returnHome();
-        Iterator<ContactIng> before = applicationManager.db().contacts().iterator();
+        ContactIng before = null;
+        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb();
+        ContactIng added = beforeCnts.iterator().next();
+        for (ContactIng b : beforeCnts) {
+            before = b;
+        }
         applicationManager.contact().deletedGroup(groups);
-        Iterator<ContactIng> after = applicationManager.db().contacts().iterator();
+        ContactIng after = null;
+        List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
+        for (ContactIng a : afterCnts) {
+            after = a;
+        }
 
+        if (after.getGroups().size() != before.getGroups().size()) {
+            Assert.assertEquals(after.getGroups().size(), before.getGroups().size() - 1);
+        }
+        System.out.println("Before " + before.getGroups().size());
+        System.out.println("After " + after.getGroups().size());
 
     }
 }

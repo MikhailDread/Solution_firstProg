@@ -33,7 +33,6 @@ public class ContactDeletedGroupTest extends TestBase{
             applicationManager.returned().homePage();
         }
         applicationManager.returned().returnHome();
-        applicationManager.contact().addInGroup();
     }
 
     @Test
@@ -43,6 +42,7 @@ public class ContactDeletedGroupTest extends TestBase{
         Iterator<ContactIng> before = applicationManager.db().contacts().iterator();
         applicationManager.contact().deletedGroup(groups);
         Iterator<ContactIng> after = applicationManager.db().contacts().iterator();
+
 
     }
 }

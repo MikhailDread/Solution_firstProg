@@ -1,6 +1,8 @@
 package ru.solutionfirstprog.addressbook.tests;
 
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,12 +28,12 @@ public class ContactAddedGroupTest extends TestBase {
         properties = new Properties();
         properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
         applicationManager.getGoTo().groupPage();
-        if(applicationManager.db().groups().size() == 0){
+        if (applicationManager.db().groups().size() == 0) {
             applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))
                     .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header")));
         }
         applicationManager.returned().returnHome();
-        if(!applicationManager.contact().thereAContact()){
+        if (!applicationManager.contact().thereAContact()) {
             applicationManager.getGoTo().newContact();
             applicationManager.contact().create();
             applicationManager.returned().homePage();
@@ -39,22 +41,51 @@ public class ContactAddedGroupTest extends TestBase {
     }
 
     @Test
-    public void testContactAdded(){
+    public void testContactAdded() {
 
-        ContactIng beforeCont = null;
+        //    ContactIng cont = applicationManager.contact().all().iterator().next();
+        //    ContactIng beforeCont = null;
+        //    applicationManager.returned().returnHome();
+        //   List<ContactIng> before = applicationManager.contact().contactListHb();
+        //   for (ContactIng b : before) {
+        //      beforeCont = b;
+        //   }
+
+        //   applicationManager.contact().addInGroup(cont.getId());
+        //   ContactIng afterCont = null;
+        //   List<ContactIng> after = applicationManager.contact().contactListHb();
+        //   for (ContactIng a : after) {
+        //      afterCont = a;
+        //  }
+
+        //  System.out.println("Before " + beforeCont.getGroups().size());
+        //  System.out.println("After " + afterCont.getGroups().size());
+
+
+        //  if (afterCont.getGroups().size() != beforeCont.getGroups().size()) {
+        //      Assert.assertEquals(afterCont.getGroups().size(), beforeCont.getGroups().size() + 1);
+
+        //   }
+
         applicationManager.returned().returnHome();
-        List<ContactIng> before = applicationManager.contact().contactListHb();
-        for(ContactIng c : before){
-            beforeCont = c;
+
+        ContactIng before = null;
+        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb();
+        ContactIng added = beforeCnts.iterator().next();
+        for (ContactIng b : beforeCnts) {
+            before = b;
+        }
+        applicationManager.contact().addInGroup(added.getId());
+        ContactIng after = null;
+        List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
+        for (ContactIng a : afterCnts) {
+            after = a;
         }
 
-        applicationManager.contact().addInGroup();
-        ContactIng afterCont = null;
-        List<ContactIng> after = applicationManager.contact().contactListHb();
-        for (ContactIng c : after){
-            afterCont = c;
+        if (after.getGroups().size() != before.getGroups().size()) {
+            Assert.assertEquals(after.getGroups().size(), before.getGroups().size() + 1);
         }
-
-        Assert.assertEquals(afterCont.getGroups().size(), beforeCont.getGroups().size()+1);
+          System.out.println("Before " + before.getGroups().size());
+          System.out.println("After " + after.getGroups().size());
     }
 }

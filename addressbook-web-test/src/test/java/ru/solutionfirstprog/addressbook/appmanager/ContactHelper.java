@@ -166,8 +166,8 @@ public class ContactHelper extends Helperbase {
     }
 
 
-    public void addInGroup() {
-        driver.findElement(By.name("selected[]")).click();
+    public void addInGroup(int id) {
+        driver.findElement(By.cssSelector("input[value = '" + id + "']")).click();
         driver.findElement(By.name("to_group")).click();
         driver.findElement(By.name("add")).click();
         applicationManager.returned().returnHome();
@@ -188,6 +188,10 @@ public class ContactHelper extends Helperbase {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<ContactIng> result = session.createQuery("from ContactIng where deprecated = '0000-00-00'").list();
+        for (ContactIng cont : result) {
+            System.out.println(cont);
+            System.out.println(cont.getGroups());
+        }
         session.getTransaction().commit();
         session.close();
         return result;

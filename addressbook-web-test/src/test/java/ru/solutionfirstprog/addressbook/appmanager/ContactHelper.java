@@ -1,5 +1,11 @@
 package ru.solutionfirstprog.addressbook.appmanager;
 
+import org.hibernate.Session;
+import org.hibernate.SessionBuilder;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +31,7 @@ public class ContactHelper extends Helperbase {
     boolean acceptNextAlert = true;
 
     ApplicationManager applicationManager;
+    private SessionBuilder<SessionBuilder> sessionFactory;
 
     public ContactHelper(WebDriver driver, ApplicationManager applicationManager) throws IOException {
         super(driver);
@@ -166,12 +173,23 @@ public class ContactHelper extends Helperbase {
         applicationManager.returned().returnHome();
     }
 
-    public void deletedGroup() {
+    public void deletedGroup(Groups group) {
         driver.findElement(By.linkText("home")).click();
         driver.findElement(By.name("group")).click();
-        new Select(driver.findElement(By.name("group"))).selectByVisibleText("test1");
+        new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.iterator().next().getName());
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("remove")).click();
         driver.findElement(By.linkText("home")).click();
+    }
+
+    public List<ContactIng> contactListHb() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactIng> result = session.createQuery("from ContactIng where deprecated = '0000-00-00'").list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 }

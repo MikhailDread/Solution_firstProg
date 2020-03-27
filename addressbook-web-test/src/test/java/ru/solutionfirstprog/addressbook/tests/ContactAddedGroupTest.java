@@ -81,18 +81,20 @@ public class ContactAddedGroupTest extends TestBase {
         List<ContactIng> beforeCnts = applicationManager.contact().contactListHb();
         ContactIng added = beforeCnts.iterator().next();
         for (ContactIng b : beforeCnts) {
-            before = b;
+            if(b.getId() == added.getId()){
+            before = b;}
         }
         applicationManager.contact().addInGroup(added.getId(), groups.getName());
         ContactIng after = null;
         List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
         for (ContactIng a : afterCnts) {
-            after = a;
+            if(a.getId() == before.getId()){
+            after = a;}
         }
 
-        //if (after.getGroups().size() != before.getGroups().size()) {
-          //  Assert.assertEquals(after.getGroups().size(), before.getGroups().size() + 1);
-       // }
+        if (after.getGroups().size() != before.getGroups().size()) {
+            Assert.assertEquals(after.getGroups().size(), before.getGroups().size() + 1);
+        }
           System.out.println("Before " + before.getGroups().size());
           System.out.println("After " + after.getGroups().size());
           System.out.println("Added " + added);

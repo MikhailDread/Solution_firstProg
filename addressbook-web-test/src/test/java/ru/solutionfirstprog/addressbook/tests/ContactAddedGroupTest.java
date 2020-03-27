@@ -83,7 +83,7 @@ public class ContactAddedGroupTest extends TestBase {
         for (ContactIng b : beforeCnts) {
             before = b;
         }
-        applicationManager.contact().addInGroup(added.getId(), groups.getId());
+        applicationManager.contact().addInGroup(added.getId(), groups.getName());
         ContactIng after = null;
         List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
         for (ContactIng a : afterCnts) {

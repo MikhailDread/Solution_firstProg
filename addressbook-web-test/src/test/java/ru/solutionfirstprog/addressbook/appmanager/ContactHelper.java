@@ -166,11 +166,12 @@ public class ContactHelper extends Helperbase {
     }
 
 
-    public void addInGroup(int id, int idGroup) {
+    public void addInGroup(int id, String nameGroup) {
         driver.findElement(By.cssSelector("input[value = '" + id + "']")).click();
         driver.findElement(By.name("to_group")).click();
         //driver.findElement(By.xpath("//table[@id='maintable']/tbody/tr[3]/td/input")).click();
-        driver.findElement(By.cssSelector("input[value = '" + idGroup + "']")).click();
+        //driver.findElement(By.cssSelector("option[value = '" + idGroup + "']")).click();
+        new Select(driver.findElement(By.name("to_group"))).selectByVisibleText(nameGroup);
         driver.findElement(By.name("add")).click();
         applicationManager.returned().returnHome();
     }

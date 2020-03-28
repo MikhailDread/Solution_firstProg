@@ -38,26 +38,26 @@ public class ContactAddedGroupTest extends TestBase {
     public void testContactAdded() {
 
         applicationManager.getGoTo().groupPage();
-        GroupInf groups = applicationManager.group().all().iterator().next();
+        GroupInf groups = applicationManager.group().all().iterator().next(); // берем группу из списка
         System.out.println("Groups " + groups);
         applicationManager.returned().returnHome();
 
         ContactIng before = null;
-        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb();
-        ContactIng added = beforeCnts.iterator().next();
-        for (ContactIng b : beforeCnts) {
-            if(b.getId() == added.getId()){
+        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные до
+        ContactIng added = beforeCnts.iterator().next(); // берем из них один
+        for (ContactIng b : beforeCnts) { // перебираем контакты
+            if(b.getId() == added.getId()){ // при совпадении айди присваиваем
             before = b;}
         }
-        applicationManager.contact().addInGroup(added.getId(), groups.getName());
+        applicationManager.contact().addInGroup(added.getId(), groups.getName()); // добавялем в контакт выбранную группу
         ContactIng after = null;
-        List<ContactIng> afterCnts = applicationManager.contact().contactListHb();
-        for (ContactIng a : afterCnts) {
-            if(a.getId() == before.getId()){
+        List<ContactIng> afterCnts = applicationManager.contact().contactListHb(); //берем контакты не удаленные после
+        for (ContactIng a : afterCnts) { //перебираем контакты
+            if(a.getId() == before.getId()){ //при совпадении айди присваиваем
             after = a;}
         }
 
-        if (after.getGroups().size() != before.getGroups().size()) {
+        if (after.getGroups().size() != before.getGroups().size()) { // сравниваем количество групп до и после добавления
             Assert.assertEquals(after.getGroups().size(), before.getGroups().size() + 1);
         }
           System.out.println("Before " + before.getGroups().size());

@@ -37,30 +37,6 @@ public class ContactAddedGroupTest extends TestBase {
     @Test
     public void testContactAdded() {
 
-        //    ContactIng cont = applicationManager.contact().all().iterator().next();
-        //    ContactIng beforeCont = null;
-        //    applicationManager.returned().returnHome();
-        //   List<ContactIng> before = applicationManager.contact().contactListHb();
-        //   for (ContactIng b : before) {
-        //      beforeCont = b;
-        //   }
-
-        //   applicationManager.contact().addInGroup(cont.getId());
-        //   ContactIng afterCont = null;
-        //   List<ContactIng> after = applicationManager.contact().contactListHb();
-        //   for (ContactIng a : after) {
-        //      afterCont = a;
-        //  }
-
-        //  System.out.println("Before " + beforeCont.getGroups().size());
-        //  System.out.println("After " + afterCont.getGroups().size());
-
-
-        //  if (afterCont.getGroups().size() != beforeCont.getGroups().size()) {
-        //      Assert.assertEquals(afterCont.getGroups().size(), beforeCont.getGroups().size() + 1);
-
-        //   }
-
         applicationManager.getGoTo().groupPage();
         GroupInf groups = applicationManager.group().all().iterator().next();
         System.out.println("Groups " + groups);

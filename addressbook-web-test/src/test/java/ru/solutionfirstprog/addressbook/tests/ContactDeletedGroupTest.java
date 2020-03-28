@@ -48,7 +48,7 @@ public class ContactDeletedGroupTest extends TestBase {
                 before = b;
             }
         }
-            applicationManager.contact().deletedGroup(groupInf); // удаляем контакт из группы
+            applicationManager.contact().deletedGroup(added.getId(), groupInf); // удаляем контакт из группы
             ContactIng after = null;
             List<ContactIng> afterCnts = applicationManager.contact().contactListHb(); //берем контакты не удаленные после
             for (ContactIng a : afterCnts) { // перебираем контакты

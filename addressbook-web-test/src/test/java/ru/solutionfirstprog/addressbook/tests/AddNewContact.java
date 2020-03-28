@@ -5,7 +5,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.Contacts;
-import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.io.*;
 import java.util.Iterator;

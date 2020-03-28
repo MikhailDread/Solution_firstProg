@@ -4,14 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
-import ru.solutionfirstprog.addressbook.module.Contacts;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
 import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 

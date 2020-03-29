@@ -31,7 +31,7 @@ public class GroupInf {
     @Type(type = "text")
     private  String feeder;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<ContactIng> contacts = new HashSet<>();
 
     public Contacts getContacts() {

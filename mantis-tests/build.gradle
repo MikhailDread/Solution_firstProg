@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-4'
+
+    implementation 'org.hamcrest:hamcrest:2.2'
+
+}
+
+test {
+    useTestNG {
+        suites 'src/test/java/resourse/testngGroups.xml'
+    }
+
+    if(project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"}
+    if(project.hasProperty('target')){
+        systemProperty 'target', "${target}"}
+}
+

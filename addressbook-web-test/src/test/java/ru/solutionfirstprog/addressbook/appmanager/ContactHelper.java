@@ -176,11 +176,12 @@ public class ContactHelper extends Helperbase {
         applicationManager.returned().returnHome();
     }
 
-    public void deletedGroup(int id, GroupInf group) {
+    public void deletedGroup(int id, GroupInf group, boolean have) {
         driver.findElement(By.linkText("home")).click();
         driver.findElement(By.name("group")).click(); // нажимаем на группу
         new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.getName()); // выбираем по имени переданному
-        if (group.getContacts().contains(id)) {
+        if (have) {
+        //if (group.getContacts().contains(id)) {
             driver.findElement(By.cssSelector("input[value = '" + id + "']")).click(); // ставим галочку на контакт
             //driver.findElement(By.name("selected[]")).click(); // ставим галочку на контакт
             driver.findElement(By.name("remove")).click(); // удаляем

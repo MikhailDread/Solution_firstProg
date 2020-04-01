@@ -45,9 +45,9 @@ public class ContactAddedGroupTest extends TestBase {
         ContactIng before = null;
         List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные до
         ContactIng added = null;
-        for(ContactIng a : beforeCnts){
-            if(!a.getGroups().contains(groups)){
-                added = a;
+        for(ContactIng a : beforeCnts){ //перебираем элементы
+            if(!(a.getGroups().contains(groups))){ // если а не вмещает в себя выбранную группу
+                added = a; // то присваиваеа а
             }
         }
         for (ContactIng b : beforeCnts) { // перебираем контакты

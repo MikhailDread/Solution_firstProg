@@ -166,32 +166,32 @@ public class ContactHelper extends Helperbase {
     }
 
 
-    public void addInGroup(int id, String nameGroup) {
-        driver.findElement(By.cssSelector("input[value = '" + id + "']")).click(); // выбираем контакт по переданному айди
+    public void addInGroup(ContactIng cont, GroupInf nameGroup) {
+        driver.findElement(By.cssSelector("input[value = '" + cont.getId() + "']")).click(); // выбираем контакт по переданному айди
         driver.findElement(By.name("to_group")).click(); // нажимаем на список групп
         //driver.findElement(By.xpath("//table[@id='maintable']/tbody/tr[3]/td/input")).click();
         //driver.findElement(By.cssSelector("option[value = '" + idGroup + "']")).click();
-        new Select(driver.findElement(By.name("to_group"))).selectByVisibleText(nameGroup); // выбираем группу по переданному имени группы
+        new Select(driver.findElement(By.name("to_group"))).selectByVisibleText(nameGroup.getName()); // выбираем группу по переданному имени группы
         driver.findElement(By.name("add")).click(); // добавляем
         applicationManager.returned().returnHome();
     }
 
-    public void deletedGroup(int id, GroupInf group, boolean have) {
+    public void deletedGroup(ContactIng cont, GroupInf group, boolean have) {
         driver.findElement(By.linkText("home")).click();
         driver.findElement(By.name("group")).click(); // нажимаем на группу
         new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.getName()); // выбираем по имени переданному
         if (have) {
         //if (group.getContacts().contains(id)) {
-            driver.findElement(By.cssSelector("input[value = '" + id + "']")).click(); // ставим галочку на контакт
+            driver.findElement(By.cssSelector("input[value = '" + cont.getId() + "']")).click(); // ставим галочку на контакт
             //driver.findElement(By.name("selected[]")).click(); // ставим галочку на контакт
             driver.findElement(By.name("remove")).click(); // удаляем
             driver.findElement(By.linkText("home")).click(); // домой
         } else {
             new Select(driver.findElement(By.name("group"))).selectByVisibleText("[all]");
-            addInGroup(id, group.getName());
+            addInGroup(cont, group);
             driver.findElement(By.name("group")).click();
             new Select(driver.findElement(By.name("group"))).selectByVisibleText(group.getName());
-            driver.findElement(By.cssSelector("input[value = '" + id + "']")).click(); // ставим галочку на контакт
+            driver.findElement(By.cssSelector("input[value = '" + cont.getId() + "']")).click(); // ставим галочку на контакт
             driver.findElement(By.name("remove")).click(); // удаляем
             driver.findElement(By.linkText("home")).click(); // домой
         }

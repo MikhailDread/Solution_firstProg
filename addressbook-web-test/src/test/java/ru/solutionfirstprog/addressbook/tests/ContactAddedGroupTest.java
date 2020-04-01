@@ -45,11 +45,14 @@ public class ContactAddedGroupTest extends TestBase {
         ContactIng before = null;
         List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные до
         ContactIng added = beforeCnts.iterator().next(); // берем из них один
+        if(added.getGroups().contains(groups)){
+            added = beforeCnts.iterator().next();
+        }
         for (ContactIng b : beforeCnts) { // перебираем контакты
             if(b.getId() == added.getId()){ // при совпадении айди присваиваем
             before = b;}
         }
-        applicationManager.contact().addInGroup(added.getId(), groups.getName()); // добавялем в контакт выбранную группу
+        applicationManager.contact().addInGroup(added, groups); // добавялем в контакт выбранную группу
         ContactIng after = null;
         List<ContactIng> afterCnts = applicationManager.contact().contactListHb(); //берем контакты не удаленные после
         for (ContactIng a : afterCnts) { //перебираем контакты

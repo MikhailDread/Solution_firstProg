@@ -24,7 +24,7 @@ public class HttpSession {
         httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }
 
-    public boolean login(String username, String passowrd) throws IOException {
+    public boolean login(String username, String password) throws IOException {
         HttpPost post = new HttpPost(applicationManager.getProperty("web.baseUrl") + "/login_page.php");
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("username", username));

@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.solutionfirstprog.addressbook.module.ContactIng;
 import ru.solutionfirstprog.addressbook.module.GroupInf;
+import ru.solutionfirstprog.addressbook.module.Groups;
 
 import java.io.File;
 import java.io.FileReader;
@@ -38,23 +39,31 @@ public class ContactAddedGroupTest extends TestBase {
     public void testContactAdded() {
 
         applicationManager.getGoTo().groupPage();
-        GroupInf groups = applicationManager.group().all().iterator().next(); // берем группу из списка
-        System.out.println("Groups " + groups);
+        //GroupInf groups = applicationManager.group().all().iterator().next(); // берем группу из списка
         applicationManager.returned().returnHome();
 
         ContactIng before = null;
         List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные до
         ContactIng added = null;
-        for(ContactIng a : beforeCnts){ //перебираем элементы
-            if(!(a.getGroups().contains(groups))){ // если а не вмещает в себя выбранную группу
-                added = a; // то присваиваеа а
+        //for(ContactIng a : beforeCnts){ //перебираем элементы
+        //    if(!(a.getGroups().contains(groups))){ // если а не вмещает в себя выбранную группу
+         //       added = a; // то присваиваеа а
+         //   } }
+        Groups groups = applicationManager.db().groups();
+        int allGroup = groups.size();
+        for(ContactIng a : beforeCnts){
+            if(a.getGroups().size() != allGroup){
+                groups.removeAll(a.getGroups());
+                added = a;
             }
         }
+
+        GroupInf groupFinish = groups.iterator().next();
         for (ContactIng b : beforeCnts) { // перебираем контакты
             if(b.getId() == added.getId()){ // при совпадении айди присваиваем
             before = b;}
         }
-        applicationManager.contact().addInGroup(added, groups); // добавялем в контакт выбранную группу
+        applicationManager.contact().addInGroup(added, groupFinish); // добавялем в контакт выбранную группу
         ContactIng after = null;
         List<ContactIng> afterCnts = applicationManager.contact().contactListHb(); //берем контакты не удаленные после
         for (ContactIng a : afterCnts) { //перебираем контакты
@@ -72,7 +81,7 @@ public class ContactAddedGroupTest extends TestBase {
           System.out.println("After1 " + after.getGroups());
 
         if (!after.getGroups().equals(before.getGroups())) {
-            Assert.assertEquals(after.getGroups(), before.getGroups().withAdded(groups));
+            Assert.assertEquals(after.getGroups(), before.getGroups().withAdded(groupFinish));
         } else {
             Assert.assertEquals(after.getGroups(), before.getGroups());
         }

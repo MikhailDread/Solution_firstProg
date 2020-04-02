@@ -38,37 +38,32 @@ public class ContactAddedGroupTest extends TestBase {
     @Test
     public void testContactAdded() {
 
-        applicationManager.getGoTo().groupPage();
-        //GroupInf groups = applicationManager.group().all().iterator().next(); // берем группу из списка
         applicationManager.returned().returnHome();
 
         ContactIng before = null;
-        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные до
+        List<ContactIng> beforeCnts = applicationManager.contact().contactListHb(); // берем контакты не удаленные До
         ContactIng added = null;
-        //for(ContactIng a : beforeCnts){ //перебираем элементы
-        //    if(!(a.getGroups().contains(groups))){ // если а не вмещает в себя выбранную группу
-         //       added = a; // то присваиваеа а
-         //   } }
-        int score = 0;
-        Groups groups = applicationManager.db().groups();
-        int allGroup = groups.size();
-        for(ContactIng a : beforeCnts){
-            if(a.getGroups().size() != allGroup){
-                groups.removeAll(a.getGroups());
-                added = a;
-                score++;
+
+        int score = 0; // создаем тригер-счётчик
+        Groups groups = applicationManager.db().groups(); // берем все группы из БД
+        int allGroup = groups.size(); // их размер
+        for(ContactIng a : beforeCnts){ // перебираем из списка контакты
+            if(a.getGroups().size() != allGroup){ //если у контакта кол-во групп не совпадает с общим
+                groups.removeAll(a.getGroups()); // удаляем в списке групп группы из контактов
+                added = a; // берем этот контакт
+                score++; // тригер пополняется
                 break;
             }
         }
 
-        if(score == 0) {
+        if(score == 0) { // если тригер путой, то создаем новый контакт
             applicationManager.getGoTo().groupPage();
             applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))
                     .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header")));
             applicationManager.returned().returnHome();
-            groups = applicationManager.db().groups();
-            allGroup = groups.size();
-            for (ContactIng a : beforeCnts) {
+            groups = applicationManager.db().groups(); // обновили инфу
+            allGroup = groups.size(); // обновили инфу
+            for (ContactIng a : beforeCnts) { // тоже самое
                 if (a.getGroups().size() != allGroup) {
                     added = a;
                     break;
@@ -76,7 +71,7 @@ public class ContactAddedGroupTest extends TestBase {
             }
         }
 
-        GroupInf groupFinish = groups.iterator().next();
+        GroupInf groupFinish = groups.iterator().next(); // берем какую-то группу из оставшихся после ремова групп
         for (ContactIng b : beforeCnts) { // перебираем контакты
             if(b.getId() == added.getId()){ // при совпадении айди присваиваем
             before = b;}

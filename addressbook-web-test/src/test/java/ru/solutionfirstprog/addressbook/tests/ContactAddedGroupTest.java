@@ -49,13 +49,30 @@ public class ContactAddedGroupTest extends TestBase {
         //    if(!(a.getGroups().contains(groups))){ // если а не вмещает в себя выбранную группу
          //       added = a; // то присваиваеа а
          //   } }
+        int score = 0;
         Groups groups = applicationManager.db().groups();
         int allGroup = groups.size();
         for(ContactIng a : beforeCnts){
             if(a.getGroups().size() != allGroup){
                 groups.removeAll(a.getGroups());
                 added = a;
+                score++;
                 break;
+            }
+        }
+
+        if(score == 0) {
+            applicationManager.getGoTo().groupPage();
+            applicationManager.group().create(new GroupInf().withName(properties.getProperty("web.nameGroup"))
+                    .withFeeder(properties.getProperty("web.footer")).withHeader(properties.getProperty("web.header")));
+            applicationManager.returned().returnHome();
+            groups = applicationManager.db().groups();
+            allGroup = groups.size();
+            for (ContactIng a : beforeCnts) {
+                if (a.getGroups().size() != allGroup) {
+                    added = a;
+                    break;
+                }
             }
         }
 

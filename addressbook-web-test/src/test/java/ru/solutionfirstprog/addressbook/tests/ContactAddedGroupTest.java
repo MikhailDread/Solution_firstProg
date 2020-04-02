@@ -55,6 +55,7 @@ public class ContactAddedGroupTest extends TestBase {
             if(a.getGroups().size() != allGroup){
                 groups.removeAll(a.getGroups());
                 added = a;
+                break;
             }
         }
 

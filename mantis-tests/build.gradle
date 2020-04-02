@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
 
-    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    implementation 'org.testng:testng:7.1.0'
 
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-4'
 
@@ -29,13 +29,17 @@ dependencies {
 }
 
 test {
-    useTestNG {
-        suites 'src/test/java/resourse/testngGroups.xml'
+    useTestNG(){
+        suites 'src/test/resources/testng.xml'
     }
-
-    if(project.hasProperty('browser')){
-        systemProperty 'browser', "${browser}"}
-    if(project.hasProperty('target')){
-        systemProperty 'target', "${target}"}
+    if (projects.hasProperty('browser')){
+        systemProrerty 'browser', "${browser}"
+    }
+    if (projects.hasProperty('target')){
+        systemProrerty 'target', "${target}"
+    }
+    if (projects.hasProperty('verifyUI')){
+        systemProrerty 'verifyUI', "${verifyUI}"
+    }
 }
 

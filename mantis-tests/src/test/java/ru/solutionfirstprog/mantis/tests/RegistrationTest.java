@@ -23,7 +23,7 @@ public class RegistrationTest extends TestBase{
     public void testRegistration() throws IOException, MessagingException {
         String email = "user@localhost.localdomain";
         String user1 = "user1";
-        String password = "password";
+        String password = "root";
         applicationManager.james().createUser(user1, password);
         applicationManager.registration().start(user1, email);
         //List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 10000);

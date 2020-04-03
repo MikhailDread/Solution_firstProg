@@ -21,9 +21,10 @@ public class RegistrationTest extends TestBase{
     }
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        String email = "user@localhost.localdomain";
-        String user1 = "user1";
-        String password = "root";
+        long now = System.currentTimeMillis();
+        String user1 = String.format("user%s" + now);
+        String password = "password";
+        String email = String.format("user%s@localhost.localdomain", now);
         applicationManager.james().createUser(user1, password);
         applicationManager.registration().start(user1, email);
         //List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 10000);

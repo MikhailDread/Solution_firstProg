@@ -53,12 +53,12 @@ public class ApplicationManager {
         return registrationHelper;
     }
 
-    //public FtpHelper ftp() {
-    //    if (ftp == null) {
-    //        ftp = new FtpHelper(this);
-    //    }
-    //    return ftp;
-    //  }
+    public FtpHelper ftp() {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+       return ftp;
+      }
 
     public WebDriver getDriver() {
         if (driver == null) {

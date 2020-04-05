@@ -23,10 +23,10 @@ public class RegistrationTest extends TestBase{
     public void testRegistration() throws IOException, MessagingException {
         //long now = System.currentTimeMillis();
         //String user1 = String.format("mantisUser%s", now);
-        String user1 = "erta133";
-        String password = "erta133";
+        String user1 = "erta1233";
+        String password = "erta1233";
         //String email = String.format("mantisUser%s@localhost", now);
-        String email = "erta133@localhost.localdomain";
+        String email = "erta1233@localhost.localdomain";
         //applicationManager.james().createUser(user1, password);
         applicationManager.registration().start(user1, email);
         List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 10000);

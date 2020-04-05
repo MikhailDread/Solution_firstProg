@@ -26,7 +26,7 @@ public class UpdatePasswordTest extends TestBase{
         //String name = list.iterator().next().getUsername();
         String email = list.iterator().next().getEmail();
         //String password = list.iterator().next().getPassword();
-        List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 60000);
+        List<MailMessage> mailMessages = applicationManager.mail().waitForMail(1, 6000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         applicationManager.updatePass().finish(confirmationLink, "test");
     }

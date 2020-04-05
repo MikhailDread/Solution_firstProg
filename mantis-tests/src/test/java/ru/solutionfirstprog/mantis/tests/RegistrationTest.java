@@ -15,22 +15,22 @@ import static org.testng.Assert.assertTrue;
 
 public class RegistrationTest extends TestBase{
 
-   // @BeforeMethod
+    @BeforeMethod
     public void startMailServer(){
         applicationManager.mail().start();
     }
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        long now = System.currentTimeMillis();
-        String user1 = String.format("mantisUser%s", now);
-        //String user1 = "erta13";
-        String password = "erta13";
-        String email = String.format("mantisUser%s@localhost", now);
-        //String email = "erta13@localhost.localdomain";
-        applicationManager.james().createUser(user1, password);
+        //long now = System.currentTimeMillis();
+        //String user1 = String.format("mantisUser%s", now);
+        String user1 = "erta133";
+        String password = "erta133";
+        //String email = String.format("mantisUser%s@localhost", now);
+        String email = "erta133@localhost.localdomain";
+        //applicationManager.james().createUser(user1, password);
         applicationManager.registration().start(user1, email);
-        //List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 10000);
-        List<MailMessage> mailMessages = applicationManager.james().waitForMail(user1, password,60000);
+        List<MailMessage> mailMessages = applicationManager.mail().waitForMail(2, 10000);
+        //List<MailMessage> mailMessages = applicationManager.james().waitForMail(user1, password,60000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         applicationManager.registration().finish(confirmationLink, password);
         //assertTrue(applicationManager.httpSession().login(user1));
@@ -42,7 +42,7 @@ public class RegistrationTest extends TestBase{
         return regex.getText(mailMessage.text);
     }
 
-   // @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopMailServer(){
         applicationManager.mail().stop();
     }

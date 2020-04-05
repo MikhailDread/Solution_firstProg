@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+
+}
+dependencies {
+    implementation 'org.testng:testng:7.1.0'
+}
+
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.9'
+
+    }
+}
+apply plugin: 'no.nils.wsdl2java'
+
+
+wsdl2java {
+    generatedWsdlDir = file("src/main/java")
+    wsdlDir = file("src/main/resources")
+    wsdlsToGenerate = [
+            ['src/main/resources/geoipservice.wsdl'],
+    ]
+}

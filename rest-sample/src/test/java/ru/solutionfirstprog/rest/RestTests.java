@@ -39,7 +39,7 @@ public class RestTests {
     private Set<Issue> getIssue() throws IOException {
         String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json"))
                 .returnContent().asString();
-        JsonElement parsed = new JsonParser().parse(json);
+        JsonElement parsed = new JsonParser.parseString(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<List<Issue>>() {}.getType());
     }

@@ -26,16 +26,16 @@ public class RestTests {
         Assert.assertEquals(newIssues, oldIssues);
     }
 
-    private Set<Issue> getIssue() throws IOException {
-        String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json"))
+    public Set<Issue> getIssue() throws IOException {
+        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json?limit=500"))
                 .returnContent().asString();
         JsonElement parsed = JsonParser.parseString(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {}.getType());
     }
 
-    private int createIssue(Issue newIssue) throws IOException {
-        String json = getExecutor().execute(Request.Post("http://demo.bugify.com/api/issues.json")
+    public int createIssue(Issue newIssue) throws IOException {
+        String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json?limit=500")
                 .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                         new BasicNameValuePair("description", newIssue.getDescription())))
                 .returnContent().asString();
@@ -43,7 +43,7 @@ public class RestTests {
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
 
-    private Executor getExecutor() {
-        return Executor.newInstance().auth("ebf3cfb4b3409e1603804f66cdc1ea10", "");
+    public Executor getExecutor() {
+        return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 }

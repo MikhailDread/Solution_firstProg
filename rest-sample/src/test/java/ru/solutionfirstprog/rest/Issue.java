@@ -8,6 +8,16 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
+    private String state_name;
+
+    public String getState_name() {
+        return state_name;
+    }
+
+    public Issue setState_name(String state_name) {
+        this.state_name = state_name;
+        return this;
+    }
 
     public int getId() {
         return id;
@@ -43,11 +53,12 @@ public class Issue {
         Issue issue = (Issue) o;
         return id == issue.id &&
                 Objects.equals(subject, issue.subject) &&
-                Objects.equals(description, issue.description);
+                Objects.equals(description, issue.description) &&
+                Objects.equals(state_name, issue.state_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subject, description);
+        return Objects.hash(id, subject, description, state_name);
     }
 }

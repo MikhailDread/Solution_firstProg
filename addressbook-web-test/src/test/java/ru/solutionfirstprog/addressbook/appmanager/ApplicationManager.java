@@ -5,11 +5,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -34,10 +37,17 @@ public class ApplicationManager{
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         dbhelper = new DbHelper();
-        if(browser.equals(BrowserType.CHROME)){
-            driver = new ChromeDriver();
-        } else if (browser.equals(BrowserType.FIREFOX)){
-            driver = new FirefoxDriver();
+        if("".equals(properties.getProperty("selenium.server"))) {
+
+            if (browser.equals(BrowserType.CHROME)) {
+                driver = new ChromeDriver();
+            } else if (browser.equals(BrowserType.FIREFOX)) {
+                driver = new FirefoxDriver();
+            }
+        } else {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(browser);
+            driver = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         driver.get(properties.getProperty("web.baseUrl"));
